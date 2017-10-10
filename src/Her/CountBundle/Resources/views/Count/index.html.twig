@@ -1,0 +1,51 @@
+{% extends "HerItemsBundle::layout_default.html.twig" %}
+{% block title %}
+{{ parent() }}
+  Visite {{ days }} jours
+{% endblock %}
+{% block left %}
+{% endblock %}
+
+{% block body %}
+
+{% if pageSlug is defined %}
+ <h2>Page: {{ pageSlug }}<h2>
+{% endif %}
+
+{% if ip is defined %}
+ <h2>IP: {{ ip }}<h2>
+{% endif %}
+
+{% if days < 2 %}
+<h1>Visite des dernières 24 heures({{ counter }} visites)</h1>
+{% else %}
+<h1>Visites des {{ days }} derniers jours({{ counter }} visites)</h1>
+{% endif %}
+
+<a href = "{{ path('her_count_clear_index') }}"><button type="button" name="button">Nettoyer</button></a>
+<a href = "{{ path('her_count_show', {'days': 365}) }}"><button type="button" name="button">Retour</button></a>
+<div class="table-responsive">
+  <table class = "table-condensed">
+    <tr>
+      <th>Adresse IP</th>
+      <th>Navigateur</th>
+      <th>Date</th>
+      <th>Page consultée</th>
+      <th>Origine</th>
+    </tr>
+  {% for visit in visits %}
+    <tr>
+      <td><a href = "{{ path('her_count_show_ip', { 'days': days ,'ip': visit.ip }) }}">{{ visit.ip }}<a/></td>
+      <td>{{ visit.browser }}</td>
+      <td>{{ visit.day }}/{{ visit.month }} à {{ visit.hour }}:{{ visit.minute }}</td>
+      <td><a href = "{{ path('her_count_show_page', { 'days': days ,'pageSlug': visit.pageSlug }) }}">{{ visit.page }}<a/></td>
+      <td>
+        {% if visit.referer is not null %}
+          {{ visit.referer }}
+        {% endif %}
+      </td>
+    </tr>
+  {% endfor %}
+  </table>
+</div>
+{% endblock %}

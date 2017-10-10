@@ -1,0 +1,25 @@
+
+her_count_show:
+    path:      /count/{days}/
+    defaults:
+        _controller: HerCountBundle:Count:index
+
+her_count_show_ip:
+    path:      /count/{days}/ip/{ip}/
+    defaults:
+        _controller: HerCountBundle:Count:indexIp
+
+her_count_show_page:
+    path:      /count/{days}/page/{pageSlug}/
+    defaults:
+        _controller: HerCountBundle:Count:indexPage
+
+her_count_clear_index:
+    path:      /clear-count/
+    defaults:
+        _controller: HerCountBundle:Count:clearCountIndex
+
+her_count_clear_action:
+    path:      /clear-count/{days}/
+    defaults:
+        _controller: HerCountBundle:Count:clearCount

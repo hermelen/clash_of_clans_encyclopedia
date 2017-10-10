@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Clash of Clans{% endblock %}</title>
+        {% block stylesheets %}
+          <link rel="stylesheet" href="{{ asset('bootstrap/bootstrap.min.css') }}" />
+          <link rel="stylesheet" href="{{ asset('css/clash_of_clans.min.css') }}">
+          <link rel="stylesheet" href="{{ asset('fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+      <div class="container container_body">
+        {% block nav %}
+        {# include "HerItemsBundle::nav.html.twig" #}
+        <div class="coc_nav row">
+          {{ render(controller(
+          'HerItemsBundle:Nav:nav'
+          )) }}
+        </div>
+        {% endblock %}
+
+            <div class="coc_page row">
+                <div class="coc_left col-xs-12 col-sm-2">
+                    {% block left %}
+                    {% endblock %}
+                </div>
+
+                <div class="coc_center col-xs-12 col-sm-8">
+                        <section class="single_container">
+                            <div class="single_title">
+                                <h1>
+                                    {% block single_title %}
+                                    {% endblock %}
+                                </h1>
+                            </div>
+                            <div class="single_content row"><!-- faire une jointure pour obtenir la liste des niveaux de pekka disponibles -->
+                                <div class="single_image col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    {% block single_image %}
+                                    {% endblock %}
+                                </div>
+                                <div class="single_info col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <ul class="level_property">
+                                        {% block level_property %}
+                                        {% endblock %}
+                                    </ul>
+                                    <ul class="general_property">
+                                        {% block general_property %}
+                                        {% endblock %}
+                                    </ul>
+                                    <ul class="level_condition">
+                                        {% block level_condition %}
+                                        {% endblock %}
+                                    </ul>
+                                    <ul class="level_statistic">
+                                        {% block level_statistics %}
+                                        {% endblock %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+                        {% if is_granted('ROLE_ADMIN') %}
+                          {% block item_links %}
+                          {% endblock %}
+                        {% endif %}
+                        <section class="single_container">
+                          <div class="single_title">
+                              <h1>
+                                  {% block single_sub_title %}
+                                  {% endblock %}
+                              </h1>
+                          </div>
+                          <div class="single_content row">
+                            <div class="clearfix"></div>
+                            <p class = "linky_title">
+                              {% block linky_items_présentation %}
+                              {% endblock %}
+                            </p>
+                            <div class="single_linky">
+                              <ul class="ul_linky_items">
+                                {% block linky_items %}
+                                {% endblock %}
+                              </ul>
+                            </div>
+                          </div>
+                        </section>
+
+
+                </div><!-- class coc_center -->
+
+
+                <div class="coc_right col-xs-12 col-sm-2">
+                    {% block right %}
+                    {% endblock %}
+                </div>
+
+            </div><!-- class coc_page row -->
+
+{% block footer %}
+<div class="coc_footer row">
+  <div class = "coc_footer_left col-xs-3">
+    Développement:<p><a href = "http://hermelen.com/public/">hermelen.com</a></p>
+  </div>
+  <div class = "coc_footer_center col-xs-6">
+    <p>hermelen.com/clash_of_clans Copyright 2017</p>
+  </div>
+  <div class = "coc_footer_right col-xs-3">
+    <a><span class="glyphicon glyphicon-envelope fa-3x"></span></a>
+  </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/clash_of_clans.min.js') }}"></script>
+{% endblock %}
+  </div><!-- container container_body -->
+</body>
+</html>

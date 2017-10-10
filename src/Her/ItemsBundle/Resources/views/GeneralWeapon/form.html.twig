@@ -1,0 +1,91 @@
+{# src/Her/ItemsBundle/Resources/views/GeneralWeapon/form.html.twig #}
+
+<div>
+  <h3>Formulaire Arme</h3>
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+        {{ form_errors(form) }}
+
+        {{ form_label(form.name, "Nom (minuscule singulier)", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.name) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.defense, "Type de défense", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.defense) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.defense, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.damageType, "Type de dégâts", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.damageType) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.damageType, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.damageArea, "Rayon de dégâts", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.damageArea) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.damageArea, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.activationArea, "Rayon d'activation", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.activationArea) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.activationArea, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.maxLevel, "Niveau Maximum", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.maxLevel) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.maxLevel, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.targetZone, "Zone cible", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.targetZone) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.targetZone, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.space, "Espace occupé", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.space) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.space, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.speed, "Cadence de tir", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.speed) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.speed, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.resource, "Resource utilisée", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.resource) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.resource) }}
+        </div>
+
+        {{ form_label(form.description, "Description", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.description) }}
+        <div class="col-sm-10">
+          {{ form_widget(form.description, {'attr': {'class': 'form-control', 'rows' : '10'}}) }}
+        </div>
+
+        {{ form_label(form.townHallAvailabilities, "Quantité disponible par Hotel de Ville", {'label_attr': {'class': 'col-sm-12 control-label','style': 'text-align:left'}}) }}
+        {{ form_errors(form.townHallAvailabilities) }}
+        <div class="col-sm-12 town_hall_availability">
+          {{ form_widget(form.townHallAvailabilities) }}
+        </div>
+
+
+
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-10">
+          {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+        </div>
+
+    {{ form_end(form) }}
+</div>
+
+<div class="clearfix"></div>

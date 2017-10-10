@@ -1,0 +1,21 @@
+services:
+    her_count.counter.visitor_counter:
+        class: Her\CountBundle\Counter\VisitorCounter
+        arguments:
+          - "@doctrine.orm.entity_manager"
+          # [ "@doctrine.orm.entity_manager" ]
+
+    # her_count.bigbrother.visit_clearer:
+    #     class: Her\CountBundle\Bigbrother\VisitClearer
+    #     arguments:
+    #       - "@doctrine.orm.entity_manager"
+
+
+    her_count.counter.visit_listener:
+        class: Her\CountBundle\Counter\VisitorListener
+        arguments:
+          - "@her_count.counter.visitor_counter"
+          - "@request_stack"
+        tags:
+          # - { name: kernel.event_listener, event: kernel.controller, method: processAddVisitor }
+          - { name: kernel.event_listener, event: kernel.response, method: processAddVisitor }

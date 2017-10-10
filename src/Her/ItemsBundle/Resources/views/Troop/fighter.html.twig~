@@ -1,0 +1,89 @@
+{% extends "HerItemsBundle::layout_items.html.twig" %}
+{% block title %}
+{{ parent() }}
+  {{ singleTroop.name }}
+{% endblock %}
+{% block left %}
+{% if troops is not null %}
+  <ul class = "ul_list_items">
+    {% for troop in troops %}
+      <li class = "li_list_items">
+        <a href="{{ path('her_troop_single', {'name': singleTroop.name, 'level':troop.level} ) }}">
+          <div class="li_div_list_items">
+            <p class = "level_list_items">{{ troop.level }}</p>
+            <img class= "img_list_items"
+            src="{{ asset(troop.image.uploadDir ~ '/' ~ troop.image.id ~ '.' ~ troop.image.ext) }}"
+            alt="{{ troop.image.alt }}"/>
+          </div>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% endblock %}
+
+{% block single_title %}
+    <h1>{{ singleTroop.name|capitalize }}</h1>
+{% endblock %}
+
+{% block single_image %}
+    {% if singleTroop.image is defined %}
+    <img
+      src="{{ asset(singleTroop.image.uploadDir ~ '/' ~ singleTroop.image.id ~ '.' ~ singleTroop.image.ext) }}"
+      alt="{{ singleTroop.image.alt }}"
+    />
+    {% endif %}
+{% endblock %}
+{% block general_property %}
+        <li>Cible préférée:
+          {% if singleTroop.targetType.name == 'both' %}Toutes{% endif %}
+          {% if singleTroop.targetType.name == 'defense' %}Défenses{% endif %}
+          {% if singleTroop.targetType.name == 'resource' %}Ressources{% endif %}
+        </li>
+        <li>Type de dégâts:
+          {% if singleTroop.damageType.name == 'unique' %}Cible Unique{% endif %}
+          {% if singleTroop.damageType.name == 'area' %}Zone{% endif %}
+        </li>
+        <li>Cibles:
+          {% if singleTroop.targetZone.name == 'both' %}Sol et Air{% endif %}
+          {% if singleTroop.targetZone.name == 'floor' %}Terrestres{% endif %}
+          {% if singleTroop.targetZone.name == 'air' %}Aériennes{% endif %}
+        </li>
+        <li>Espace Occupé: {{ singleTroop.space }}</li>
+        <li>Vitesse de déplacement: {{ singleTroop.speed }}</li>
+        <li>Durée de formation : {{ trainingDuration_4 }}
+          <span class="nb">Détail <i class="info_duration fa fa-caret-down" aria-hidden="true"></i></span>
+        </li>
+        {% if singleTroop.barrack.resource.type == 'elixir' %}
+        <section class="hidden info_duration_detail">
+          <ul>
+            <li>3 casernes: {{ trainingDuration_3 }}</li>
+            <li>2 casernes: {{ trainingDuration_2 }}</li>
+            <li>1 caserne: {{ trainingDuration_1 }}</li>
+          </ul>
+        </section>
+        {% else %}
+        <section class="hidden info_duration_detail">
+          <ul>
+            <li>1 caserne noire:
+              {% if (singleTroop.duration * 2) < 60 %}
+              {{ singleTroop.duration * 2 }} sec</li>
+              {% else %}
+              {{ ((singleTroop.duration * 2) / 60)|round(0, 'floor') }} min
+              {% if (singleTroop.duration * 2) % 60 > 0 %}
+              {{ (singleTroop.duration * 2) % 60 }}
+              {% endif %}
+              {% endif %}
+            </li>
+          </ul>
+        </section>
+        {% endif %}
+{% endblock %}
+{% block item_links %}
+<p>
+  <a href="{{ path('her_troop_form') }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-plus"></i>
+    Ajouter un combattant
+  </a>
+</p>
+{% endblock %}

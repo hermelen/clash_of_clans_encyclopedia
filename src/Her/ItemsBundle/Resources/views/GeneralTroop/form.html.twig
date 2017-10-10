@@ -1,0 +1,135 @@
+{# src/Her/ItemsBundle/Resources/views/Troop/form.html.twig #}
+
+<div>
+  <h3>Formulaire Troupes</h3>
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+      <h2>Informations Générales</h2>
+        {{ form_errors(form) }}
+
+        {{ form_label(form.name, "Nom (minuscule singulier)", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.name) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.targetType, "Cible Préférée", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.targetType) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.targetType, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.trainingDuration, "Durée d'entraînement", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.trainingDuration) }}
+        <div class="col-sm-4">
+          <div class="form-control trainingDurationDetailContainer" id="trainingDurationDetailContainer">
+          </div>
+        </div>
+
+        {{ form_label(form.damageType, "Type de dégâts", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.damageType) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.damageType, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.maxLevel, "Niveau Maximum", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.maxLevel) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.maxLevel, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.targetZone, "Zone cible", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.targetZone) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.targetZone, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.space, "Espace occupé", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.space) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.space, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.barrack, "Caserne requise", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.barrack) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.barrack) }}
+        </div>
+
+        {{ form_label(form.darkBarrack, "Caserne Noire requise", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.darkBarrack) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.darkBarrack) }}
+        </div>
+
+        {{ form_label(form.speed, "Vitesse de déplacement", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.speed) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.speed, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.resource, "Resource utilisée", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.resource) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.resource) }}
+        </div>
+
+        {{ form_label(form.troopType, "Type de combattant", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.troopType) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.troopType) }}
+        </div>
+
+        {{ form_label(form.description, "Description", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.description) }}
+        <div class="col-sm-10">
+          {{ form_widget(form.description, {'attr': {'class': 'form-control', 'rows' : '10'}}) }}
+        </div>
+
+        {{ form_label(form.offensiveStrategy, "Stratégie Offensive", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.offensiveStrategy) }}
+        <div class="col-sm-10">
+          {{ form_widget(form.offensiveStrategy, {'attr': {'class': 'form-control', 'rows' : '10'}}) }}
+        </div>
+
+        {{ form_label(form.defensiveStrategy, "Stratégie défensive", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.defensiveStrategy) }}
+        <div class="col-sm-10">
+          {{ form_widget(form.defensiveStrategy, {'attr': {'class': 'form-control', 'rows' : '10'}}) }}
+        </div>
+
+        {{ form_label(form.other, "Divers", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.other) }}
+        <div class="col-sm-10">
+          {{ form_widget(form.other, {'attr': {'class': 'form-control', 'rows' : '10'}}) }}
+        </div>
+
+        <div class="col-sm-12">
+          {{ form_widget(form.trainingDuration, {'attr': {'class': 'hide form-control trainingDuration'}}) }}
+        </div>
+
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-10">
+          {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+        </div>
+
+    {{ form_end(form) }}
+</div>
+
+<div class="hidden durationDetail" id="trainingDurationDetail">
+  <form class="form_duration"  action="#" method="post">
+    <table class="table_duration">
+      <tr>
+        <th class = "td_duration">Minutes:</td>
+        <th class = "td_duration">Secondes:</td>
+      </tr>
+      <tr>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="durationMinutes" id="trainingDurationMinutes" value="0"></td>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="durationSeconds" id="trainingDurationSeconds" value="0"></td>
+      </tr>
+      <td><button class = "btn-danger"type="button" id="submitTrainingDuration" name="submitDuration button">Valider Durée Entraînement</button></td>
+    </table>
+  </form>
+</div>
+
+<div class="clearfix"></div>

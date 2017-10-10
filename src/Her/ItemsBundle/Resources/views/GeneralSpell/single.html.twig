@@ -1,0 +1,138 @@
+{% extends "HerItemsBundle::layout_items.html.twig" %}
+{% block title %}
+  {{parent()}}
+  : {{ single.name }}
+{% endblock %}
+{% block left %}
+{% endblock %}
+
+{% block single_title %}
+    <h1>{{ single.name }}</h1>
+    <div class="div_ul_short_list">
+      <ul class = "ul_short_list">
+        {% if single.resource.type == 2 %}
+        <a class = "a_short_list" href="{{ path('her_general_classic_spell_homepage') }}">
+          <li class = "li_short_list">
+            <p class = "p_short_list" >Accueil Sorts Classiques</p>
+          </li>
+        </a>
+        {% else %}
+        <a class = "a_short_list" href="{{ path('her_general_dark_spell_homepage') }}">
+          <li class = "li_short_list">
+            <p class = "p_short_list" >Accueil Sorts Noirs</p>
+          </li>
+        </a>
+        {% endif %}
+        {% for i in 1.. single.maxLevel %}
+        <a class = "a_short_list" href="{{ path('her_spell_single', {'slug': single.slug, 'level': i } ) }}">
+          <li class = "li_short_list">
+              <p class = "p_short_list" >{{ i }}</p>
+          </li>
+        </a>
+        {% endfor %}
+        <a class = "a_short_list" href="{{ path('her_spell_add', {'slug' : single.slug}) }}">
+          <li class = "li_short_list">
+              <i class="glyphicon glyphicon-plus"></i>
+              Ajouter un niveau
+          </li>
+        </a>
+      </ul>
+    </div>
+{% endblock %}
+
+{% block single_image %}
+  {% if single.image is not null %}
+  <img
+    src="{{ asset(single.image.uploadDir ~ '/' ~ single.image.id ~ '.' ~ single.image.ext) }}"
+    alt="{{ single.image.alt }}" />
+    {% else %}
+    <img class= "img_list_items"
+    src="{{ asset('images/unavailable.png') }}"
+    alt="image non-disponible"/>
+    {% endif %}
+{% endblock %}
+
+{% block level_property %}
+
+{% endblock %}
+
+
+
+
+{% block general_property %}
+{% if single.targetType is not null %}
+  <li>Cible préférée:
+    {% if single.targetType.name == 'defense and resource' %}Toutes{% endif %}
+    {% if single.targetType.name == 'defense' %}Défenses{% endif %}
+    {% if single.targetType.name == 'resource' %}Ressources{% endif %}
+  </li>
+{% endif %}
+<li>Espace Occupé: {{ single.space }}</li>
+<li>Durée formation: {{ trainingDuration_4 }}</li>
+<li>Rayon d'action: {{ single.damageArea }} {% if single.damageArea < 2 %}case{% else %}cases{% endif %} </li>
+{% if single.randomDamageArea > 0 %}
+  <li>Rayon d'action aléatoire: {{ single.randomDamageArea }} {% if single.randomDamageArea < 2 %}case{% else %}cases{% endif %} </li>
+{% endif %}
+{% if single.actionDuration > 0 %}
+  <li>Durée d'action: {{ single.actionDuration }}{% if single.actionDuration < 2 %}seconde{% else %}secondes{% endif %} </li>
+{% endif %}
+{% if single.impulseNumber > 0 %}
+  <li>Nombre de séquences actives: {{ single.impulseNumber }}</li>
+{% endif %}
+{% if single.impulseDuration > 0 %}
+  <li>Durée d'une séquence: {{ single.impulseDuration }}{% if single.impulseDuration < 2 %} seconde{% else %} secondes{% endif %} </li>
+{% endif %}
+{% if single.cloneDuration > 0 %}
+  <li>Espérence de vie des clones: {{ single.cloneDuration }}{% if single.cloneDuration < 2 %} seconde{% else %} secondes{% endif %} </li>
+{% endif %}
+{% if single.child > 0 %}
+  <li>Nombre de troupes générées: {{ single.child }} </li>
+{% endif %}
+{% endblock %}
+
+{% block level_condition %}
+{% if single.spellFactory is not null %}
+<li>
+  Usine de sorts requise:
+  <a href="{{ path('her_spell_factory_single', {'level': single.spellFactory.level} ) }}">
+    <div class="li_div_list_items">
+      <p class = "level_list_items">{{ single.spellFactory.level}}</p>
+      {% if single.spellFactory.image is not null %}
+      <img class= "img_list_items"
+      src="{{ asset(single.spellFactory.image.uploadDir ~ '/' ~ single.spellFactory.image.id ~ '.' ~ single.spellFactory.image.ext) }}"
+      alt="{{ single.spellFactory.image.alt }}"/>
+      {% else %}
+      <img class= "img_list_items"
+      src="{{ asset('images/unavailable.png') }}"
+      alt="image non-disponible"/>
+      {% endif %}
+    </div>
+  </a>
+</li>
+{% endif %}
+{% endblock %}
+
+{% block level_statistics %}
+{% endblock %}
+
+{% block item_links %}
+<p>
+  <a href="{{ path('her_general_spell_edit', {'slug': single.slug}) }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-edit"></i>
+    Modifier {{ single.name }}
+  </a>
+  <a href="{{ path('her_general_spell_delete', {'slug': single.slug}) }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-trash"></i>
+    Supprimer {{ single.name }}
+  </a>
+</p>
+{% endblock %}
+
+{% block linky_items_présentation %}
+{# if single.description is not null #}
+{# single.description #}
+{# endif #}
+{% endblock %}
+
+{% block linky_items %}
+{% endblock %}

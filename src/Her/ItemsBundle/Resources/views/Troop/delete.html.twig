@@ -1,0 +1,29 @@
+{# src/Her/ItemsBundle/Resources/views/Troop/delete.html.twig #}
+
+{% extends "HerItemsBundle::layout_default.html.twig" %}
+
+{% block title %}
+  Supprimer {{ single.generalTroop.name }} niveau {{ single.level }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+  <h2>Supprimer {{ single.generalTroop.name }} niveau {{ single.level }}</h2>
+
+  <p>
+    Etes-vous certain de vouloir supprimer: {{ single.generalTroop.name }} niveau {{ single.level }} ?
+  </p>
+
+  {# On met l'id de l'annonce dans la route de l'action du formulaire #}
+  <form action="{{ path('her_troop_delete', {'slug': single.generalTroop.slug, 'level': single.level}) }}" method="post">
+    <a href="{{ path('her_troop_single', {'slug': single.generalTroop.slug, 'level': single.level}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour à {{ single.generalTroop.name }} niveau {{ single.level }}
+    </a>
+    {# Ici j'ai écrit le bouton de soumission à la main #}
+    <input type="submit" value="Supprimer" class="btn btn-danger" />
+    {# Ceci va générer le champ CSRF #}
+    {{ form_rest(form) }}
+  </form>
+
+{% endblock %}

@@ -1,0 +1,212 @@
+{% extends "HerItemsBundle::layout_items.html.twig" %}
+{% block title %}
+  {{parent()}}
+  : {{ single.generalSpecialHero.name }} {{ single.level }}
+{% endblock %}
+
+{% block single_title %}
+    <h1>{{ single.generalSpecialHero.name }} (niveau {{ single.level }})</h1>
+
+    <div class="div_ul_short_list">
+      <ul class = "ul_short_list">
+        <a class = "a_short_list" href="{{ path('her_general_special_hero_single', {'general': general.slug}) }}">
+          <li class = "li_short_list">
+              <p class = "p_short_list" >Accueil {{general.name}}</p>
+          </li>
+        </a>
+        {% for i in 1.. single.generalSpecialHero.maxLevel %}
+        <a class = "a_short_list" href="{{ path('her_special_hero_single', {'general': general.slug, 'level': i } ) }}">
+          <li class = "li_short_list{% if i == single.level %}_current {% endif %}">
+              <p class = "p_short_list" >{{ i }}</p>
+          </li>
+        </a>
+        {% endfor %}
+      </ul>
+    </div>
+{% endblock %}
+
+{% block single_image %}
+    {% if general.image is not null %}
+    <img
+      src="{{ asset(single.image.uploadDir ~ '/' ~ single.image.id ~ '.' ~ single.image.ext) }}"
+      alt="{{ single.image.alt }}"
+    />
+    {% else %}
+    <img class= "img_list_items"
+    src="{{ asset('images/unavailable.png') }}"
+    alt="image non-disponible"/>
+    {% endif %}
+{% endblock %}
+
+{% block level_property %}
+{% if single.damageImprovement is not null %}
+    <li>Augmentation des dégâts: {{ single.damageImprovement }}
+      <img class="thumb_item" src="{{ asset('images/items/item_damage.png') }}" alt="life">
+    </li>
+    <div class="window_jauge_container">
+      <div class="window_jauge_border"></div>
+      <div class="window_jauge"></div>
+      <div class="jauge_container">
+        {% if best is not null %}
+          <div class="jauge_level jauge_levelTransparency"></div>
+          <div class="jauge_level jauge_leveldefault " style="width: {{ (single.damageImprovement / best.damageImprovement) *100 }}% "></div>
+        {% endif %}
+      </div>
+    </div>
+{% endif %}
+{% if single.lifeImprovement is not null %}
+        <li>Points de vie récupérés: {{ single.lifeImprovement }}
+          <img class="thumb_item" src="{{ asset('images/items/item_life.png') }}" alt="exp">
+        </li>
+        <div class="window_jauge_container">
+          <div class="window_jauge_border"></div>
+          <div class="window_jauge"></div>
+        <div class="jauge_container">
+            {% if best is not null %}
+            <div class="jauge_level jauge_levelTransparency"></div>
+            <div class="jauge_level jauge_leveldefault " style="width: {{ (single.lifeImprovement / best.lifeImprovement) *100 }}% "></div>
+            {% endif %}
+          </div>
+        </div>
+{% endif %}
+{% if single.speedImprovement is not null %}
+        <li>Vitesse accrue de : {{ single.speedImprovement }}
+          <img class="thumb_item" src="{{ asset('images/items/item_speed.png') }}" alt="exp">
+        </li>
+        <div class="window_jauge_container">
+          <div class="window_jauge_border"></div>
+          <div class="window_jauge"></div>
+        <div class="jauge_container">
+            {% if best is not null %}
+            <div class="jauge_level jauge_levelTransparency"></div>
+            <div class="jauge_level jauge_leveldefault " style="width: {{ (single.speedImprovement / best.speedImprovement) *100 }}% "></div>
+            {% endif %}
+          </div>
+        </div>
+{% endif %}
+{% if single.child is not null %}
+        <li>Troupes générées : {{ single.child }} {{ general.childTroop.name }}s
+          <img class="thumb_item" src="{{ asset('images/items/item_attack.png') }}" alt="exp">
+        </li>
+        <div class="window_jauge_container">
+          <div class="window_jauge_border"></div>
+          <div class="window_jauge"></div>
+        <div class="jauge_container">
+            {% if best is not null %}
+            <div class="jauge_level jauge_levelTransparency"></div>
+            <div class="jauge_level jauge_leveldefault " style="width: {{ (single.child / best.child) *100 }}% "></div>
+            {% endif %}
+          </div>
+        </div>
+{% endif %}
+{% if single.specialDuration is not null %}
+        <li>Durée du pouvoir : {{ specialDuration }}
+          <img class="thumb_item" src="{{ asset('images/items/item_time.png') }}" alt="exp">
+        </li>
+        <div class="window_jauge_container">
+          <div class="window_jauge_border"></div>
+          <div class="window_jauge"></div>
+        <div class="jauge_container">
+            {% if best is not null %}
+            <div class="jauge_level jauge_levelTransparency"></div>
+            <div class="jauge_level jauge_leveldefault " style="width: {{ (single.specialDuration / best.specialDuration) *100 }}% "></div>
+            {% endif %}
+          </div>
+        </div>
+{% endif %}
+{% if single.lifePercent is not null %}
+        <li>Guérison : {{ single.lifePercent }}%
+          <img class="thumb_item" src="{{ asset('images/items/item_life.png') }}" alt="exp">
+        </li>
+        <div class="window_jauge_container">
+          <div class="window_jauge_border"></div>
+          <div class="window_jauge"></div>
+        <div class="jauge_container">
+            {% if best is not null %}
+            <div class="jauge_level jauge_levelTransparency"></div>
+            <div class="jauge_level jauge_leveldefault " style="width: {{ (single.lifePercent / best.lifePercent) *100 }}% "></div>
+            {% endif %}
+          </div>
+        </div>
+{% endif %}
+{% if single.maxLifeImprovement is not null %}
+        <li>Max récupération points de vie : {{ single.maxLifeImprovement }}
+          <img class="thumb_item" src="{{ asset('images/items/item_life.png') }}" alt="exp">
+        </li>
+        <div class="window_jauge_container">
+          <div class="window_jauge_border"></div>
+          <div class="window_jauge"></div>
+        <div class="jauge_container">
+            {% if best is not null %}
+            <div class="jauge_level jauge_levelTransparency"></div>
+            <div class="jauge_level jauge_leveldefault " style="width: {{ (single.maxLifeImprovement / best.maxLifeImprovement) *100 }}% "></div>
+            {% endif %}
+          </div>
+        </div>
+{% endif %}
+{% endblock %}
+
+
+
+
+{% block general_property %}
+{% endblock %}
+
+{% block level_condition %}
+{% if heros is not null %}
+<li class = "li_list_items">
+  <p>Héro requis:</p>
+  {{ general.generalTroop.name|capitalize }} niveaux
+  {% for hero in heros %}
+  <a href="{{ path('her_troop_single', {'slug':hero.generalTroop.slug, 'level':hero.level} ) }}">
+    <div class="hero_li_div_list_items">
+      <p class = "level_list_items">{{ hero.level }}</p>
+    </div>
+  </a>
+  {% endfor %}
+</li>
+{% endif %}
+
+{% endblock %}
+
+{% block level_statistics %}
+{% endblock %}
+
+{% block item_links %}
+<p>
+  <a href="{{ path('her_special_hero_edit', {'general': general.slug, 'level': single.level}) }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-edit"></i>
+    Modifier ce {{ single.generalSpecialHero.name }}
+  </a>
+  <a href="{{ path('her_special_hero_delete', {'general': general.slug, 'level': single.level}) }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-trash"></i>
+    Supprimer ce {{ single.generalSpecialHero.name }}
+  </a>
+</p>
+{% endblock %}
+
+{% block linky_items_présentation %}
+  Permet de déployer:
+{% endblock %}
+
+{% block linky_items %}
+  {% if childs is not null %}
+    {% for i in 1.. single.child %}
+        <li class = "li_linky_items">
+          <a href="{{ path('her_general_troop_single', {'slug': general.generalTroop.slug} ) }}">
+            <div class="li_div_linky_items li_div_linky_items_riot">
+              {% if childs[0].image is not null %}
+              <img class= "img_linky_items"
+              src="{{ asset(childs[0].image.uploadDir ~ '/' ~ childs[0].image.id ~ '.' ~ childs[0].image.ext) }}"
+              alt="{{ childs[0].image.alt }}"/>
+              {% else %}
+              <img class= "img_list_items"
+              src="{{ asset('images/unavailable.png') }}"
+              alt="image non-disponible"/>
+              {% endif %}
+            </div>
+          </a>
+        </li>
+    {% endfor %}
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,72 @@
+{# src/Her/ItemsBundle/Resources/views/Troop/form.html.twig #}
+
+<div>
+  <h3>Formulaire Batiment</h3>
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+      <h2>Informations Générales</h2>
+        {{ form_errors(form) }}
+
+        {{ form_label(form.name, "Nom", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.name) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.resource, "Resource utilisée", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.resource) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.resource) }}
+        </div>
+
+        {{ form_label(form.maxLevel, "Niveau Maximum", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.maxLevel) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.maxLevel) }}
+        </div>
+
+        {{ form_label(form.space, "Espace (1 seul chiffre)", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.space) }}
+        <div class="col-sm-4">
+          {{ form_widget(form.space) }}
+        </div>
+
+        {{ form_label(form.townHallAvailabilities, "Quantité disponible par Hotel de Ville", {'label_attr': {'class': 'col-sm-12 control-label','style': 'text-align:left'}}) }}
+        {{ form_errors(form.townHallAvailabilities) }}
+        <div class="col-sm-12 town_hall_availability">
+          {{ form_widget(form.townHallAvailabilities) }}
+        </div>
+
+        {{ form_label(form.description, "Description", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.description) }}
+        <div class="col-sm-10">
+          {{ form_widget(form.description, {'attr': {'class': 'form-control', 'rows' : '10'}}) }}
+        </div>
+
+        {{ form_label(form.offensiveStrategy, "Stratégie Offensive", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.offensiveStrategy) }}
+        <div class="col-sm-10">
+          {{ form_widget(form.offensiveStrategy, {'attr': {'class': 'form-control', 'rows' : '10'}}) }}
+        </div>
+
+        {{ form_label(form.defensiveStrategy, "Stratégie défensive", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.defensiveStrategy) }}
+        <div class="col-sm-10">
+          {{ form_widget(form.defensiveStrategy, {'attr': {'class': 'form-control', 'rows' : '10'}}) }}
+        </div>
+
+        {{ form_label(form.other, "Divers", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.other) }}
+        <div class="col-sm-10">
+          {{ form_widget(form.other, {'attr': {'class': 'form-control', 'rows' : '10'}}) }}
+        </div>
+
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-10">
+          {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+        </div>
+
+    {{ form_end(form) }}
+</div>
+
+<div class="clearfix"></div>

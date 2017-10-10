@@ -1,0 +1,195 @@
+{# src/Her/ItemsBundle/Resources/views/Troop/form.html.twig #}
+
+<div>
+  <h3>Formulaire {{ form.vars.troopType.name }}: {{ form.vars.name|capitalize }}</h3>
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+        {{ form_errors(form) }}
+
+        {{ form_label(form.generalTroop, "Troupe", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.generalTroop) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.generalTroop) }}
+        </div>
+
+        {{ form_label(form.level, "Niveau", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.level) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.level, {'attr': {'class': 'form-control'}}) }}
+        </div>
+{% if form.vars.troopType.name == "basique" %}
+        {{ form_label(form.laboratory, "Laboratoire requis", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.laboratory) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.laboratory) }}
+        </div>
+{% else %}
+        {{ form_label(form.laboratory, "Laboratoire requis", {'label_attr': {'class': 'hide col-sm-3 control-label'}}) }}
+        {{ form_errors(form.laboratory) }}
+        <div class="hide col-sm-3">
+          {{ form_widget(form.laboratory) }}
+        </div>
+{% endif %}
+{% if form.vars.troopType.name != "héro" %}
+        {{ form_label(form.townHall, "Hotel de Ville requis", {'label_attr': {'class': 'hide col-sm-3 control-label'}}) }}
+        {{ form_errors(form.townHall) }}
+        <div class="hide col-sm-3">
+          {{ form_widget(form.townHall) }}
+        </div>
+{% else %}
+        {{ form_label(form.townHall, "Hotel de Ville requis", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.townHall) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.townHall) }}
+        </div>
+{% endif %}
+
+        {{ form_label(form.damage, "Dégâts par seconde", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.damage) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.damage, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.hitDamage, "Dégâts par coup", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.hitDamage) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.hitDamage, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+{% if form.vars.troopType.name != "héro" %}
+        {{ form_label(form.trainingCost, "Coût entraînement", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.trainingCost) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.trainingCost, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.healingDuration, "Durée regénération", {'label_attr': {'class': 'hide col-sm-3 control-label'}}) }}
+        {{ form_errors(form.healingDuration) }}
+        <div class="hide col-sm-3">
+          <div class="form-control fullDurationDetailContainer" id="fullDurationDetailContainer">
+          </div>
+        </div>
+
+        {{ form_label(form.collateral, "Dégâts si destruction", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.collateral) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.collateral, {'attr': {'class': 'form-control'}}) }}
+        </div>
+{% else %}
+        {{ form_label(form.trainingCost, "Coût entraînement", {'label_attr': {'class': 'hide col-sm-3 control-label'}}) }}
+        {{ form_errors(form.trainingCost) }}
+        <div class="hide col-sm-3">
+          {{ form_widget(form.trainingCost, {'attr': {'class': 'hide form-control'}}) }}
+        </div>
+
+        {{ form_label(form.healingDuration, "Durée regénération", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.healingDuration) }}
+        <div class="col-sm-3">
+          <div class="form-control fullDurationDetailContainer" id="fullDurationDetailContainer">
+          </div>
+        </div>
+
+        {{ form_label(form.collateral, "Dégâts si destruction", {'label_attr': {'class': 'hide col-sm-3 control-label'}}) }}
+        {{ form_errors(form.collateral) }}
+        <div class="hide ol-sm-3">
+          {{ form_widget(form.collateral, {'attr': {'class': 'form-control'}}) }}
+        </div>
+{% endif %}
+
+
+
+        {{ form_label(form.life, "Points de vie", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.life) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.life, {'attr': {'class': 'form-control'}}) }}
+        </div>
+{% if form.vars.troopType.name == "basique" %}
+        {{ form_label(form.child, "Nb Troupes générées", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.child) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.child, {'attr': {'class': 'form-control'}}) }}
+        </div>
+{% else %}
+        {{ form_label(form.child, "Nb Troupes générées", {'label_attr': {'class': 'hide col-sm-3 control-label'}}) }}
+        {{ form_errors(form.child) }}
+        <div class="hide col-sm-3">
+          {{ form_widget(form.child, {'attr': {'class': 'form-control'}}) }}
+        </div>
+{% endif %}
+
+        {{ form_label(form.improvementDuration, "Durée d'amélioration", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.improvementDuration) }}
+        <div class="col-sm-3">
+          <div class="form-control durationDetailContainer" id="durationDetailContainer">
+          </div>
+        </div>
+
+        {{ form_label(form.improvementCost, "Coût d'amélioration", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.improvementCost) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.improvementCost, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.image, "Image", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.image) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.image) }}
+        </div>
+
+        <div class="col-sm-12">
+          {{ form_widget(form.improvementDuration, {'attr': {'class': 'hide form-control improvementDuration'}}) }}
+        </div>
+
+        <div class="col-sm-12">
+          {{ form_widget(form.healingDuration, {'attr': {'class': 'hide form-control fullDuration'}}) }}
+        </div>
+
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-10">
+          {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+        </div>
+
+    {{ form_end(form) }}
+</div>
+
+<div class="hidden durationDetail" id="durationDetail">
+  <form class="form_duration"  action="#" method="post">
+    <table class="table_duration">
+      <tr>
+        <th class = "td_duration">Jours:</td>
+        <th class = "td_duration">Heures:</td>
+        <th class = "td_duration">Minutes:</td>
+        <th class = "td_duration">Secondes:</td>
+      </tr>
+      <tr>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="durationDays" id="durationDays" value="0"></td>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="durationHours" id="durationHours" value="0"></td>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="durationMinutes" id="durationMinutes" value="0"></td>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="durationSeconds" id="durationSeconds" value="0"></td>
+      </tr>
+      <td><button class = "btn-danger"type="button" id="submitDuration" name="submitDuration button">Valider Durée Amélioration</button></td>
+    </table>
+  </form>
+</div>
+
+<div class="hidden fullDurationDetail" id="fullDurationDetail">
+  <form class="form_duration"  action="#" method="post">
+    <table class="table_duration">
+      <tr>
+        <th class = "td_duration">Jours:</td>
+        <th class = "td_duration">Heures:</td>
+        <th class = "td_duration">Minutes:</td>
+        <th class = "td_duration">Secondes:</td>
+      </tr>
+      <tr>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="fullDurationDays" id="fullDurationDays" value="0"></td>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="fullDurationHours" id="fullDurationHours" value="0"></td>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="fullDurationMinutes" id="fullDurationMinutes" value="0"></td>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="fullDurationSeconds" id="fullDurationSeconds" value="0"></td>
+      </tr>
+      <td><button class = "btn-danger"type="button" id="submitFullDuration" name="submitDuration button">Valider Durée Regénération</button></td>
+    </table>
+  </form>
+</div>
+
+<div class="clearfix"></div>

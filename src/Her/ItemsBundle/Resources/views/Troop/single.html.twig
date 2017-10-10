@@ -1,0 +1,279 @@
+{% extends "HerItemsBundle::layout_items.html.twig" %}
+{% block title %}
+  {{parent()}}
+  : {{ general.name }} {{ single.level }}
+{% endblock %}
+{% block left %}
+<!-- faire une jointure pour obtenir la liste des niveaux de pekka disponibles -->
+{% endblock %}
+
+{% block single_title %}
+    <h1>{{ general.name }} (niveau {{ single.level }})</h1>
+
+    <div class="div_ul_short_list">
+      <ul class = "ul_short_list">
+        <a class = "a_short_list" href="{{ path('her_general_troop_single', {'slug': general.slug} ) }}">
+          <li class = "li_short_list">
+              <p class = "p_short_list" >Accueil {{ general.name|capitalize }}</p>
+          </li>
+        </a>
+        {% for i in 1.. general.maxLevel %}
+        <a class = "a_short_list" href="{{ path('her_troop_single', {'slug': general.slug, 'level': i } ) }}">
+          <li class = "li_short_list{% if i == single.level %}_current {% endif %}">
+              <p class = "p_short_list" >{{ i }}</p>
+          </li>
+        </a>
+        {% endfor %}
+      </ul>
+    </div>
+
+{% endblock %}
+
+{% block single_image %}
+    {% if single.image is not null %}
+    <img
+      src="{{ asset(single.image.uploadDir ~ '/' ~ single.image.id ~ '.' ~ single.image.ext) }}"
+      alt="{{ single.image.alt }}"
+    />
+    {% else %}
+    <img class= "img_list_items"
+    src="{{ asset('images/unavailable.png') }}"
+    alt="image non-disponible"/>
+    {% endif %}
+{% endblock %}
+
+{% block level_property %}
+    <li>Points de vie: {{ single.life }}
+      {% if single.specialHero is not null %}
+       <span class="special">+ {{ single.specialHero.lifeImprovement }}</span>
+      {% endif %}
+      <img class="thumb_item" src="{{ asset('images/items/item_life.png') }}" alt="life">
+    </li>
+    <div class="window_jauge_container">
+      <div class="window_jauge_border"></div>
+      <div class="window_jauge"></div>
+      <div class="jauge_container">
+        {% if best is not null %}
+          <div class="jauge_level jauge_levelTransparency"></div>
+          {% if best.specialHero is not null and single.specialHero is not null %}
+          <div class="jauge_level jauge_levelspecial " style="width: {{ ( (single.life + single.specialHero.lifeImprovement) / best.life ) *100 }}% "></div>
+          {% endif %}
+          <div class="jauge_level jauge_leveldefault " style="width: {{ (single.life / best.life) *100 }}% "></div>
+        {% endif %}
+      </div>
+    </div>
+    <li>Dégats: {{ single.damage }}
+      {% if single.specialHero is not null %}
+       <span class="special">+ {{ single.specialHero.damageImprovement }}</span>
+      {% endif %}
+      <img class="thumb_item" src="{{ asset('images/items/item_damage.png') }}" alt="damage">
+    </li>
+    <div class="window_jauge_container">
+      <div class="window_jauge_border"></div>
+      <div class="window_jauge"></div>
+      <div class="jauge_container">
+        {% if best is not null %}
+          <div class="jauge_level jauge_levelTransparency"></div>
+          {% if best.specialHero is not null and single.specialHero is not null %}
+          <div class="jauge_level jauge_levelspecial " style="width: {{ ( (single.damage + single.specialHero.damageImprovement) / best.damage ) *100 }}% "></div>
+          {% endif %}
+          <div class="jauge_level jauge_leveldefault " style="width: {{ (single.damage / best.damage) *100 }}% "></div>
+        {% endif %}
+      </div>
+    </div>
+    {% if single.hitDamage > 0 %}
+    <li>Dégats par coup porté: {{ single.hitDamage }}
+      <img class="thumb_item" src="{{ asset('images/items/item_damage.png') }}" alt="damage">
+    </li>
+    <div class="window_jauge_container">
+      <div class="window_jauge_border"></div>
+      <div class="window_jauge"></div>
+      <div class="jauge_container">
+        {% if best is not null %}
+          <div class="jauge_level jauge_levelTransparency"></div>
+          <div class="jauge_level jauge_leveldefault " style="width: {{ (single.hitDamage / best.hitDamage) *100 }}% "></div>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+    {% if single.trainingCost is not null %}
+    <li>Coût formation: {{ single.trainingCost }}
+      {% if general.resource.type == 'gold' %}
+        Or
+        <img class="thumb_item" src="{{ asset('images/items/item_gold.png') }}" alt="gold">
+      {% endif %}
+      {% if general.resource.type == 'elixir' %}
+        Elixir
+        <img class="thumb_item" src="{{ asset('images/items/item_elixir.png') }}" alt="elixir">
+      {% endif %}
+      {% if general.resource.type == 'dark' %}
+        Elixir Noir
+        <img class="thumb_item" src="{{ asset('images/items/item_dark.png') }}" alt="dark">
+      {% endif %}
+    </li>
+    <div class="window_jauge_container">
+      <div class="window_jauge_border"></div>
+      <div class="window_jauge"></div>
+      <div class="jauge_container">
+        {% if best.trainingCost is not null %}
+          <div class="jauge_level jauge_levelTransparency"></div>
+          <div class="jauge_level jauge_level{{ general.resource.type }} " style="width: {{ (single.trainingCost / best.trainingCost) *100 }}% "></div>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+    {% if single.child > 0 %}
+      <li>Troupes générées: {{ single.child }}</li>
+      <div class="window_jauge_container">
+        <div class="window_jauge_border"></div>
+        <div class="window_jauge"></div>
+        {% if best is not null %}
+          {% if best.child > 0 %}
+            <div class="jauge_container">
+                <div class="jauge_level jauge_levelTransparency"></div>
+              <div class="jauge_level jauge_leveldefault " style="width: {{ (single.child / best.child) *100 }}% "></div>
+            </div>
+          {% endif %}
+        {% endif %}
+    </div>
+    {% endif %}
+    {% if single.collateral > 0 %}
+      <li>Dégats à sa mort: {{ single.collateral }}
+        <img class="thumb_item" src="{{ asset('images/items/item_damage.png') }}" alt="damage">
+      </li>
+      <div class="window_jauge_container">
+        <div class="window_jauge_border"></div>
+        <div class="window_jauge"></div>
+        {% if best is not null %}
+          {% if best.collateral > 0 %}
+            <div class="jauge_container">
+                <div class="jauge_level jauge_levelTransparency"></div>
+              <div class="jauge_level jauge_leveldefault " style="width: {{ (single.collateral / best.collateral) *100 }}% "></div>
+            </div>
+          {% endif %}
+        {% endif %}
+      </div>
+    {% endif %}
+
+{% endblock %}
+
+
+
+
+{% block general_property %}
+{% endblock %}
+
+{% block level_condition %}
+    {% if single.improvementCost > 0 %}
+      <li>
+        Coût amélioration: {{ single.improvementCost }}
+        {% if general.resource.type == 'gold' %}
+          Or
+          <img class="thumb_item" src="{{ asset('images/items/item_gold.png') }}" alt="gold">
+        {% endif %}
+        {% if general.resource.type == 'elixir' %}
+          Elixir
+          <img class="thumb_item" src="{{ asset('images/items/item_elixir.png') }}" alt="elixir">
+        {% endif %}
+        {% if general.resource.type == 'dark' %}
+          Elixir Noir
+          <img class="thumb_item" src="{{ asset('images/items/item_dark.png') }}" alt="dark">
+        {% endif %}
+      </li>
+      <div class="window_jauge_container">
+        <div class="window_jauge_border"></div>
+        <div class="window_jauge"></div>
+        <div class="jauge_container">
+          {% if best is not null %}
+            <div class="jauge_level jauge_levelTransparency"></div>
+            <div class = "jauge_level jauge_level{{ general.resource.type }}" style="width: {{ (single.improvementCost / best.improvementCost) *100 }}% "></div>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+    {% if single.improvementDuration > 0 %}
+        <li>Durée d'amélioration: {{ improvementDuration }}
+          <img class="thumb_item" src="{{ asset('images/items/item_time.png') }}" alt="time">
+        </li>
+        <div class="window_jauge_container">
+          <div class="window_jauge_border"></div>
+          <div class="window_jauge"></div>
+          <div class="jauge_container">
+            {% if best is not null %}
+              <div class="jauge_level jauge_levelTransparency"></div>
+              <div class="jauge_level jauge_leveldefault " style="width: {{ (single.improvementDuration / best.improvementDuration) *100 }}% "></div>
+            {% endif %}
+          </div>
+        </div>
+    {% endif %}
+    {% if single.healingDuration > 0 %}
+        <li>Durée d'amélioration: {{ healingDuration }}
+          <img class="thumb_item" src="{{ asset('images/items/item_time.png') }}" alt="time">
+        </li>
+        <div class="window_jauge_container">
+          <div class="window_jauge_border"></div>
+          <div class="window_jauge"></div>
+          <div class="jauge_container">
+            {% if best is not null %}
+              <div class="jauge_level jauge_levelTransparency"></div>
+              <div class="jauge_level jauge_leveldefault " style="width: {{ (single.healingDuration / best.healingDuration) *100 }}% "></div>
+            {% endif %}
+          </div>
+        </div>
+    {% endif %}
+    {% if single.laboratory is not null %}
+        <li>
+          Laboratoire requis:
+          <a href="{{ path('her_laboratory_single', {'level':single.laboratory.level} ) }}">
+            <div class="li_div_list_items">
+              <p class = "level_list_items">{{ single.laboratory.level }}</p>
+              {% if single.laboratory.image is not null %}
+              <img class= "img_list_items"
+              src="{{ asset(single.laboratory.image.uploadDir ~ '/' ~ single.laboratory.image.id ~ '.' ~ single.laboratory.image.ext) }}"
+              alt="{{ single.laboratory.image.alt }}"/>
+              {% else %}
+              <img class= "img_list_items"
+              src="{{ asset('images/unavailable.png') }}"
+              alt="image non-disponible"/>
+              {% endif %}
+            </div>
+          </a>
+        </li>
+    {% endif %}
+    {% if single.specialHero is not null %}
+    <li>
+      Pouvoir:
+      <a href="{{ path('her_special_hero_single', {'general':single.specialHero.generalSpecialHero.slug,'level':single.specialHero.level} ) }}">
+        <div class="li_div_list_items">
+          <p class = "special_level_list_items">{{ single.specialHero.generalSpecialHero.name }}</p>
+          <p class = "special_name_list_items">{{ single.specialHero.level }}</p>
+          {% if single.specialHero.generalSpecialHero.image is not null %}
+          <img class= "img_list_items"
+          src="{{ asset(single.specialHero.generalSpecialHero.image.uploadDir ~ '/' ~ single.specialHero.generalSpecialHero.image.id ~ '.' ~ single.specialHero.generalSpecialHero.image.ext) }}"
+          alt="{{ single.single.specialHero.generalSpecialHero.image.alt }}"/>
+          {% else %}
+          <img class= "img_list_items"
+          src="{{ asset('images/unavailable.png') }}"
+          alt="image non-disponible"/>
+          {% endif %}
+        </div>
+      </a>
+    </li>
+    {% endif %}
+{% endblock %}
+
+{% block level_statistics %}
+{% endblock %}
+
+{% block item_links %}
+<p>
+  <a href="{{ path('her_troop_edit', {'slug': general.slug, 'level': single.level}) }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-edit"></i>
+    Modifier {{ general.name }} niveau {{ single.level }}
+  </a>
+  <a href="{{ path('her_troop_delete', {'slug': general.slug, 'level': single.level}) }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-trash"></i>
+    Supprimer {{ general.name }} niveau {{ single.level }}
+  </a>
+</p>
+{% endblock %}

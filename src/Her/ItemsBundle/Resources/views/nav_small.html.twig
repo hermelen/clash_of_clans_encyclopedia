@@ -1,0 +1,116 @@
+<nav class = "top_small">
+    <section class="nav_left col-xs-2 col-sm-2 col-md-2 col-lg-2">
+
+    </section>
+    <section class="nav_center col-xs-8 col-sm-8 col-md-8 col-lg-8">
+      <ul class = "main_ul">
+        <li class = "main_li"><a href="{{ path('her_town_hall_homepage') }}">Hotel de Ville</a>
+        </li>
+        <li class = "main_li"><a href="">Armée</a>
+          <ul class = "primary_ul primary_ul_hidden">
+            <li class="primary_li"><a href="{{ path('her_general_troop_homepage') }}">Troupes</a>
+              <ul class="secondary_ul secondary_ul_hidden">
+                <li class = "secondary_li"><a class="elixir" href="{# path('her_general_troop_single', {'name': 'barbare'} ) #}">Classiques</a>
+                  <ul class="tertiary_ul tertiary_ul_hidden">
+                    <li class = "tertiary_li"><a class="elixir" href="{{ path('her_general_troop_single', {'name': 'barbare'} ) }}">Barbare</a></li>
+                    <li class = "tertiary_li"><a class="elixir" href="{{ path('her_general_troop_single', {'name': 'P.E.K.K.A.'} ) }}">P.E.K.K.A</a></li>
+                  </ul>
+                </li>
+                <li class = "secondary_li"><a class="dark" href="{# path('her_general_troop_single', {'name': 'pekka'} ) #}">Noires</a>
+                  <ul class="tertiary_ul tertiary_ul_hidden">
+                    <li class = "tertiary_li"><a class="dark" href="{{ path('her_general_troop_single', {'name': 'golem'} ) }}">Golem</a></li>
+                  </ul>
+                </li>
+                <li class = "secondary_li"><a href="{# path('her_general_troop_homepage') #}">Héros</a>
+                  <ul class="tertiary_ul tertiary_ul_hidden">
+                    <li class = "tertiary_li"><a class="dark" href="">Roi des Barbares</a></li>
+                    <li class = "tertiary_li"><a class="dark" href="">Reine des Archers</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li class="primary_li"><a href="">Casernes</a>
+              <ul class="secondary_ul secondary_ul_hidden">
+                <li class = "secondary_li"><a href="{{ path('her_barrack_homepage') }}">Caserne</a></li>
+                <li class = "secondary_li"><a href="{{ path('her_dark_barrack_homepage') }}">Caserne Noire</a></li>
+              </ul>
+            </li>
+            <li class="primary_li"><a href="{{ path('her_general_spell_homepage') }}">Sorts</a>
+              <ul class="secondary_ul secondary_ul_hidden">
+                <li class = "secondary_li"><a class="elixir" href="{{ path('her_general_classic_spell_homepage') }}">Classiques</a>
+                  <ul class="tertiary_ul tertiary_ul_hidden">
+                    <li class = "tertiary_li"><a class="elixir" href="{{ path('her_general_spell_single', {'name': 'foudre'} ) }}">Foudre</a></li>
+                    <li class = "tertiary_li"><a class="elixir" href="{{ path('her_general_spell_single', {'name': 'guérison'} ) }}">Guérison</a></li>
+                    <li class = "tertiary_li"><a class="elixir" href="{{ path('her_general_spell_single', {'name': 'rage'} ) }}">Rage</a></li>
+                  </ul>
+                </li>
+                <li class = "secondary_li"><a class="dark" href="{{ path('her_general_dark_spell_homepage') }}">Noirs</a>
+                  <ul class="tertiary_ul tertiary_ul_hidden">
+                    <li class = "tertiary_li"><a class="dark" href="{{ path('her_general_spell_single', {'name': 'sismique'} ) }}">Sismique</a></li>
+                    <li class = "tertiary_li"><a class="dark" href="{{ path('her_general_spell_single', {'name': 'précipitation'} ) }}">Précipitation</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li class="primary_li"><a href="">Usine Sorts</a>
+              <ul class="secondary_ul secondary_ul_hidden">
+                <li class = "secondary_li"><a class="elixir" href="{{ path('her_spell_factory_homepage') }}">Classique</a>
+                </li>
+                <li class = "secondary_li"><a class="dark" href="{{ path('her_dark_spell_factory_homepage') }}">Noire</a>
+                </li>
+              </ul>
+            </li>
+            <li class="primary_li"><a href="{{ path('her_laboratory_homepage') }}">Laboratoire</a></li>
+          </ul>
+        </li>
+
+        <li class = "main_li"><a href="">Défenses</a>
+          <ul class = "primary_ul primary_ul_hidden">
+            <li class = "primary_li"><a href="{{ path('her_general_weapon_homepage') }}">Armes</a>
+              <ul class = "secondary_ul secondary_ul_hidden">
+                <li class = "secondary_li"><a href="">Canon</a></li>
+                <li class = "secondary_li"><a href="{{ path('her_general_weapon_single', {'name': 'mortier'} ) }}">Mortier</a></li>
+                <li class = "secondary_li"><a href="">Tour d'archer</a></li>
+                <li class = "secondary_li"><a href="">Tour à bombes</a></li>
+                <li class = "secondary_li"><a href="">Tour de sorciers</a></li>
+                <li class = "secondary_li"><a href="">Tour de l'enfer</a></li>
+                <li class = "secondary_li"><a href="">Arc-X</a></li>
+                <li class = "secondary_li"><a href="">Aigle artilleur</a></li>
+              </ul>
+            </li>
+            <li class = "primary_li"><a href="">Pièges</a>
+              <ul class = "secondary_ul secondary_ul_hidden">
+                <li class = "secondary_li"><a href="">Bascule</a></li>
+                <li class = "secondary_li"><a href="">Bombe</a></li>
+                <li class = "secondary_li"><a href="">Bombe Géante</a></li>
+              </ul>
+            </li>
+            <li class = "primary_li"><a href="">Remparts</a></li>
+          </ul>
+        </li>
+
+        <li class = "main_li"><a href="">Ressources</a>
+          <ul class = "primary_ul primary_ul_hidden">
+            <li class = "primary_li"><a href="">Production</a>
+              <ul class = "secondary_ul secondary_ul_hidden">
+                <li class = "secondary_li"><a href="">Extracteur d'Elixir</a></li>
+                <li class = "secondary_li"><a href="">Mine d'Or</a></li>
+                <li class = "secondary_li"><a href="">Foreuse d'Elixir Noir</a></li>
+              </ul>
+            </li>
+            <li class = "primary_li"><a href="">Stockage</a>
+              <ul class = "secondary_ul secondary_ul_hidden">
+                <li class = "secondary_li"><a href="">Réservoir d'Elixir</a></li>
+                <li class = "secondary_li"><a href="">Réserve d'Or</a></li>
+                <li class = "secondary_li"><a href="">Réservoir d'Elixir Noir</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+    </section>
+    <section class="nav_right col-xs-2 col-sm-2 col-md-2 col-lg-2">
+
+    </section>
+</nav>

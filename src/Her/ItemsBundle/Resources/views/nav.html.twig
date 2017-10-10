@@ -1,0 +1,135 @@
+<nav class = "top">
+    <section class="nav_all col-xs-12 col-sm-12 col-md-12 col-lg-12 nav-down">
+      <div class="mobile-nav-icons hide-full">
+        <!-- <i class="fa fa-bars fa-3x" id="show-mobile-nav" aria-hidden="true"></i> -->
+        <!-- <i class="fa fa-sort-up fa-3x" id="show-nav" aria-hidden="true"></i> -->
+        <i class="fa fa-plus-square-o fa-3x" id="show-mobile-nav" aria-hidden="true"></i>
+        <i class="fa fa-minus-square-o fa-3x hidden" id="hide-mobile-nav" aria-hidden="true"></i>
+      </div>
+    </section>
+    <section class="nav_left col-xs-1 col-sm-1 col-md-1 col-lg-1 nav-down"></section>
+    <section class="nav_center col-xs-10 col-sm-10 col-md-10 col-lg-10 nav-down hide-mobile">
+
+      <ul class = "main_ul">
+        <li class = "main_li home"><a href="">Accueil</a></li>
+        <li class = "main_li"><a href="{{ path('her_town_hall_homepage') }}">Hotel de Ville</a></li>
+        <li class = "main_li army"><a href="">Armée</a></li>
+        <li class = "main_li defense"><a href="{{ path('her_general_weapon_homepage') }}">Défenses</a></li>
+        <li class = "main_li resource"><a href="">Ressources</a></li>
+      </ul>
+            <ul class = "primary_ul home">
+              {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+              <li class = "primary_li log"><a href = "">Compte: {{ app.user.username }}</a><li>
+              {% else %}
+              <li class = "primary_li"><a href="{{ path('fos_user_security_login') }}">Connexion</a><li>
+              {% endif %}
+              {% if is_granted('ROLE_ADMIN') %}
+              <li class="primary_li"><a href="{{ path('her_batiment_homepage') }}">Tous les bâtiments</a></li>
+              {% endif %}
+            </ul>
+                  <ul class = "secondary_ul log ">
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <li class="secondary_li"><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+                        {% endif %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <li class="primary_li"><a href="{{ path('her_count_show', { 'days': 1 }) }}">Voir les visites</a></li>
+                        {% endif %}
+                  </ul>
+
+            <ul class = "primary_ul army">
+              <li class="primary_li troop"><a href="{{ path('her_general_troop_homepage') }}">Troupes</a></li>
+              <li class="primary_li barrack"><a href="">Casernes</a></li>
+              <li class="primary_li spell"><a href="{{ path('her_general_spell_homepage') }}">Sorts</a></li>
+              <li class="primary_li factory"><a href="">Usine Sorts</a></li>
+              <li class="primary_li laboratory"><a href="{{ path('her_laboratory_homepage') }}">Laboratoire</a></li>
+            </ul>
+                  <ul class="secondary_ul troop">
+                    <li class = "secondary_li classicTroop"><a class="elixir" href="">Classiques</a></li>
+                    <li class = "secondary_li darkTroop"><a class="dark" href="">Noires</a></li>
+                    <li class = "secondary_li hero"><a href="">Héros</a></li>
+                  </ul>
+                        <ul class="tertiary_ul classicTroop">
+                          {% for navClassicTroop in navClassicTroops %}
+                            <li class = "tertiary_li"><a href="{{ path('her_general_troop_single', { 'slug': navClassicTroop.slug } ) }}">{{ navClassicTroop.name|capitalize }}</a></li>
+                          {% endfor %}
+                        </ul>
+                        <ul class="tertiary_ul darkTroop">
+                          {% for navDarkTroop in navDarkTroops %}
+                            <li class = "tertiary_li"><a href="{{ path('her_general_troop_single', { 'slug': navDarkTroop.slug } ) }}">{{ navDarkTroop.name|capitalize }}</a></li>
+                          {% endfor %}
+                        </ul>
+                        <ul class="tertiary_ul hero">
+                          {% for navHeroTroop in navHeroTroops %}
+                            <li class = "tertiary_li"><a href="{{ path('her_general_troop_single', { 'slug': navHeroTroop.slug } ) }}">{{ navHeroTroop.name|capitalize }}</a></li>
+                          {% endfor %}
+                        </ul>
+                  <ul class="secondary_ul barrack">
+                    <li class = "secondary_li"><a href="{{ path('her_barrack_homepage') }}">Caserne</a></li>
+                    <li class = "secondary_li"><a href="{{ path('her_dark_barrack_homepage') }}">Caserne Noire</a></li>
+                  </ul>
+                  <ul class="secondary_ul spell">
+                    <li class = "secondary_li classicSpell"><a class="elixir" href="{{ path('her_general_classic_spell_homepage') }}">Classiques</a></li>
+                    <li class = "secondary_li darkSpell"><a class="dark" href="{{ path('her_general_dark_spell_homepage') }}">Noirs</a></li>
+                  </ul>
+                        <ul class="tertiary_ul classicSpell">
+                          {% for navClassicSpell in navClassicSpells %}
+                            <li class = "tertiary_li"><a href="{{ path('her_general_spell_single', { 'slug': navClassicSpell.slug } ) }}">{{ navClassicSpell.name|capitalize }}</a></li>
+                          {% endfor %}
+                        </ul>
+                        <ul class="tertiary_ul darkSpell">
+                          {% for navDarkSpell in navDarkSpells %}
+                            <li class = "tertiary_li"><a href="{{ path('her_general_spell_single', { 'slug': navDarkSpell.slug } ) }}">{{ navDarkSpell.name|capitalize }}</a></li>
+                          {% endfor %}
+                        </ul>
+                  <ul class="secondary_ul factory">
+                    <li class = "secondary_li"><a class="elixir" href="{{ path('her_spell_factory_homepage') }}">Classique</a></li>
+                    <li class = "secondary_li"><a class="dark" href="{{ path('her_dark_spell_factory_homepage') }}">Noire</a></li>
+                  </ul>
+
+
+
+            <ul class = "primary_ul defense ">
+              <li class = "primary_li weapon"><a href="">Armes</a></li>
+              <li class = "primary_li trap"><a href="">Pièges</a></li>
+              <li class = "primary_li rampart"><a href="">Remparts</a></li>
+            </ul>
+                  <ul class = "secondary_ul weapon ">
+                    {% for navWeapon in navWeapons %}
+                      <li class = "secondary_li"><a href="{{ path('her_general_weapon_single', { 'slug': navWeapon.slug } ) }}">{{ navWeapon.name|capitalize }}</a></li>
+                    {% endfor %}
+                  </ul>
+                  <ul class = "secondary_ul trap ">
+                    {% for navTrap in navTraps %}
+                      <li class = "secondary_li"><a href="{{ path('her_general_weapon_single', { 'slug': navTrap.slug } ) }}">{{ navTrap.name|capitalize }}</a></li>
+                    {% endfor %}
+                  </ul>
+
+            <ul class = "primary_ul resource ">
+              <li class = "primary_li production"><a href="">Production</a></li>
+              <li class = "primary_li stock"><a href="">Stockage</a></li>
+            </ul>
+                  <ul class = "secondary_ul production ">
+                    <li class = "secondary_li"><a href="{{ path('her_prod_homepage', {'slug': 'extracteur-d-elixir'}) }}">Extracteur d'Elixir</a></li>
+                    <li class = "secondary_li"><a href="{{ path('her_prod_homepage', {'slug': 'mine-d-or'}) }}">Mine d'Or</a></li>
+                    <li class = "secondary_li"><a href="{{ path('her_prod_homepage', {'slug': 'foreuse-d-elixir-noir'}) }}">Foreuse d'Elixir Noir</a></li>
+                  </ul>
+                  <ul class = "secondary_ul stock ">
+                    <li class = "secondary_li"><a href="{{ path('her_stock_homepage', {'slug': 'reservoir-d-elixir'}) }}">Réservoir d'Elixir</a></li>
+                    <li class = "secondary_li"><a href="{{ path('her_stock_homepage', {'slug': 'reserve-d-or'}) }}">Réserve d'Or</a></li>
+                    <li class = "secondary_li"><a href="{{ path('her_stock_homepage', {'slug': 'reservoir-d-elixir-noir'}) }}">Réservoir d'Elixir Noir</a></li>
+                  </ul>
+
+
+
+
+
+
+
+
+
+
+    </section>
+    <section class="nav_right col-xs-1 col-sm-1 col-md-1 col-lg-1 nav-down">
+
+    </section>
+</nav>

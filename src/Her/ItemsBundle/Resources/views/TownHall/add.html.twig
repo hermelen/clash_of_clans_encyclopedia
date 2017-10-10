@@ -1,0 +1,14 @@
+{# src/Her/ItemsBundle/Resources/views/TownHall/add.html.twig #}
+
+{% extends "HerItemsBundle::layout_default.html.twig" %}
+
+{% block body %}
+
+  {{ include("HerItemsBundle:TownHall:form.html.twig") }}
+
+  <p>
+    Attention : cette caserne sera ajoutée directement
+    sur la page d'accueil après validation du formulaire.
+  </p>
+
+{% endblock %}

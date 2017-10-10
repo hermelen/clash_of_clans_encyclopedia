@@ -1,0 +1,51 @@
+{% extends "HerItemsBundle::layout_default.html.twig" %}
+{% block title %}
+{{ parent() }}
+  Pouvoir des héros
+{% endblock %}
+{% block body %}
+<h1>Liste des Bâtiments</h1>
+<p>
+  <a href="{{ path('her_batiment_add') }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-plus"></i>
+    Ajouter un Pouvoir
+  </a>
+</p>
+<div class="clearfix"></div>
+{% if singles is not null %}
+<div class = "batiment_container">
+  <ul>
+    {% for single in singles %}
+        <li>
+          <div class="batiment">
+            <p class = "p_short_list" >{{ single.name }}</p>
+            <p class = "p_short_list" >Niveau Max: {{ single.maxLevel }}</p>
+            {% if single.generalTroop is not null %}
+            <p class = "p_short_list" >Hero: {{ single.generalTroop.name }}</p>
+            {% endif %}
+            <p class = "p_short_list" >Description:<br>{{ single.description }}</p>
+            <p>
+              <a href="{{ path('her_general_special_hero_single', {'general':single.slug} ) }}" class="btn btn-default">
+                <i class="glyphicon glyphicon-search"></i>
+                Aperçu
+              </a>
+            </p>
+            <p>
+              <a href="{{ path('her_general_special_hero_edit', {'slug':single.name} ) }}" class="btn btn-default">
+                <i class="glyphicon glyphicon-edit"></i>
+                Modifier
+              </a>
+            </p>
+            <p>
+              <a href="{{ path('her_general_special_hero_delete', {'slug': single.name}) }}" class="btn btn-danger">
+                <i class="glyphicon glyphicon-trash"></i>
+                Supprimer
+              </a>
+            </p>
+          </div>
+        </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+{% endblock %}

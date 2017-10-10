@@ -1,0 +1,37 @@
+{% extends "HerItemsBundle::layout_default.html.twig" %}
+{% block title %}
+{{ parent() }}
+  Défenses
+{% endblock %}
+{% block body %}
+    {% if singles is not null %}
+      <ul class = "ul_display_items">
+        {% for single in singles %}
+          <li class = "li_display_items">
+            <a href="{{ path('her_general_weapon_single', {'slug': single.generalWeapon.slug } ) }}">
+              <div class="li_div_display_items">
+                <p class = "name_display_items">{{ single.generalWeapon.name }}</p>
+                {% if single.image is not null %}
+                <img class= "img_display_items"
+                src="{{ asset(single.image.uploadDir ~ '/' ~ single.image.id ~ '.' ~ single.image.ext) }}"
+                alt="{{ single.image.alt }}"/>
+                {% else %}
+                <img class= "img_list_items"
+                src="{{ asset('images/unavailable.png') }}"
+                alt="image non-disponible"/>
+                {% endif %}
+              </div>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+{% endblock %}
+{% block item_links %}
+<p>
+  <a href="{{ path('her_general_weapon_add') }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-plus"></i>
+    Ajouter une défense
+  </a>
+</p>
+{% endblock %}

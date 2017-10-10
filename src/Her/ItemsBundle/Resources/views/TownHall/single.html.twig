@@ -1,0 +1,358 @@
+{% extends "HerItemsBundle::layout_items.html.twig" %}
+{% block title %}
+  {{parent()}}
+  : {{ single.batiment.name }} {{ single.level }}
+{% endblock %}
+
+{% block single_title %}
+    <h1>{{ single.batiment.name }} (niveau {{ single.level }})</h1>
+
+    <div class="div_ul_short_list">
+      <ul class = "ul_short_list">
+        <a class = "a_short_list" href="{{ path('her_town_hall_homepage') }}">
+          <li class = "li_short_list">
+              <p class = "p_short_list" >Accueil {{ single.batiment.name }}</p>
+          </li>
+        </a>
+        {% for i in 1.. single.batiment.maxLevel %}
+        <a class = "a_short_list" href="{{ path('her_town_hall_single', {'level': i } ) }}">
+          <li class = "li_short_list{% if i == single.level %}_current {% endif %}">
+              <p class = "p_short_list" >{{ i }}</p>
+          </li>
+        </a>
+        {% endfor %}
+      </ul>
+    </div>
+{% endblock %}
+
+{% block single_image %}
+    {% if single.image is not null %}
+    <img
+      src="{{ asset(single.image.uploadDir ~ '/' ~ single.image.id ~ '.' ~ single.image.ext) }}"
+      alt="{{ single.image.alt }}"/>
+    {% else %}
+    <img class= "img_linky_items"
+    src="{{ asset('images/unavailable.png') }}"
+    alt="image non-disponible"/>
+    {% endif %}
+{% endblock %}
+
+{% block level_property %}
+    <li>Points de vie: {{ single.life }}
+      <img class="thumb_item" src="{{ asset('images/items/item_life.png') }}" alt="life">
+    </li>
+    <div class="window_jauge_container">
+      <div class="window_jauge_border"></div>
+      <div class="window_jauge"></div>
+      <div class="jauge_container">
+          {% if best is not null %}
+            <div class="jauge_level jauge_levelTransparency"></div>
+            <div class="jauge_level jauge_leveldefault " style="width: {{ (single.life / best.life) *100 }}% "></div>
+          {% endif %}
+      </div>
+    </div>
+    {% if single.exp > 0 %}
+      <li>Points Expérience gagnés: {{ single.exp }}
+        <img class="thumb_item" src="{{ asset('images/items/item_exp.png') }}" alt="exp">
+      </li>
+      <div class="window_jauge_container">
+        <div class="window_jauge_border"></div>
+        <div class="window_jauge"></div>
+        <div class="jauge_container">
+          {% if best is not null %}
+            <div class="jauge_level jauge_levelTransparency"></div>
+            <div class="jauge_level jauge_leveldefault " style="width: {{ (single.exp / best.exp) *100 }}% ">
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+      <li>Stockage Or et Elixir: {{ single.capacityGold }}
+        <img class="thumb_item_bis" src="{{ asset('images/items/item_gold.png') }}" alt="gold">
+        <img class="thumb_item" src="{{ asset('images/items/item_elixir.png') }}" alt="elixir">
+      </li>
+      <div class="window_jauge_container">
+        <div class="window_jauge_border"></div>
+        <div class="window_jauge"></div>
+        <div class="jauge_container">
+          {% if best is not null %}
+            <div class="jauge_level jauge_levelTransparency"></div>
+            <div class="jauge_level jauge_levelGoldElixir" style="width: {{ (single.capacityGold / best.capacityGold) *100 }}% "></div>
+          {% endif %}
+        </div>
+      </div>
+    {% if single.treasuryGold > 0 %}
+      <li>Trésorerie Or et Elixir: {{ single.treasuryGold }}
+        <img class="thumb_item_bis" src="{{ asset('images/items/item_gold.png') }}" alt="gold">
+        <img class="thumb_item" src="{{ asset('images/items/item_elixir.png') }}" alt="elixir">
+      </li>
+      <div class="window_jauge_container">
+        <div class="window_jauge_border"></div>
+        <div class="window_jauge"></div>
+        <div class="jauge_container">
+          {% if best is not null %}
+            <div class="jauge_level jauge_levelTransparency"></div>
+            <div class="jauge_level jauge_levelGoldElixir" style="width: {{ (single.treasuryGold / best.treasuryGold) *100 }}% "></div>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+    {% if single.capacityDark > 0 %}
+        <li>Stockage Elixir Noir: {{ single.capacityDark }}
+          <img class="thumb_item" src="{{ asset('images/items/item_dark.png') }}" alt="dark">
+        </li>
+        <div class="window_jauge_container">
+          <div class="window_jauge_border"></div>
+          <div class="window_jauge"></div>
+          <div class="jauge_container">
+            {% if best is not null %}
+              <div class="jauge_level jauge_levelTransparency"></div>
+              <div class="jauge_level jauge_leveldark " style="width: {{ (single.capacityDark / best.capacityDark) *100 }}% "></div>
+            {% endif %}
+          </div>
+        </div>
+    {% endif %}
+    {% if single.treasuryDark > 0 %}
+        <li>Trésorerie Elixir Noir: {{ single.treasuryDark }}
+          <img class="thumb_item" src="{{ asset('images/items/item_dark.png') }}" alt="dark">
+        </li>
+        <div class="window_jauge_container">
+          <div class="window_jauge_border"></div>
+          <div class="window_jauge"></div>
+          <div class="jauge_container">
+            {% if best is not null %}
+              <div class="jauge_level jauge_levelTransparency"></div>
+              <div class="jauge_level jauge_leveldark " style="width: {{ (single.treasuryDark / best.treasuryDark) *100 }}% "></div>
+            {% endif %}
+          </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block level_condition %}
+    {% if single.improvementCost > 0 %}
+        <li>
+          Coût de la construction: {{ single.improvementCost }}
+          {% if single.batiment.resource.type == 'gold' %}
+            Or
+            <img class="thumb_item" src="{{ asset('images/items/item_gold.png') }}" alt="gold">
+          {% endif %}
+          {% if single.batiment.resource.type == 'elixir' %}
+            Elixir
+            <img class="thumb_item" src="{{ asset('images/items/item_elixir.png') }}" alt="elixir">
+          {% endif %}
+          {% if single.batiment.resource.type == 'dark' %}
+            Elixir Noir
+            <img class="thumb_item" src="{{ asset('images/items/item_dark.png') }}" alt="dark">
+          {% endif %}
+        </li>
+        <div class="window_jauge_container">
+          <div class="window_jauge_border"></div>
+          <div class="window_jauge"></div>
+          <div class="jauge_container">
+            {% if best is not null %}
+              <div class="jauge_level jauge_levelTransparency"></div>
+              <div class = "jauge_level jauge_level{{ single.batiment.resource.type }}" style="width: {{ (single.improvementCost / best.improvementCost) *100 }}% "></div>
+            {% endif %}
+          </div>
+        </div>
+    {% endif %}
+    {% if single.improvementCost > 0 %}
+        <li>Temps de construction: {{ formattedDuration }}
+          <img class="thumb_item" src="{{ asset('images/items/item_time.png') }}" alt="time">
+        </li>
+        <div class="window_jauge_container">
+          <div class="window_jauge_border"></div>
+          <div class="window_jauge"></div>
+          <div class="jauge_container">
+            {% if best is not null %}
+              <div class="jauge_level jauge_levelTransparency"></div>
+              <div class="jauge_level jauge_leveldefault " style="width: {{ (single.improvementDuration / best.improvementDuration) *100 }}% "></div>
+            {% endif %}
+          </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block level_statistics %}
+{% endblock %}
+
+{% block item_links %}
+<p>
+  <a href="{{ path('her_town_hall_edit', {'level': single.level}) }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-edit"></i>
+    Modifier l'{{ single.batiment.name }}
+  </a>
+  <a href="{{ path('her_town_hall_delete', {'level': single.level}) }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-trash"></i>
+    Supprimer l'{{ single.batiment.name }}
+  </a>
+</p>
+{% endblock %}
+
+{% block single_sub_title %}
+<h1>Donne accès à:</h1>
+{% endblock %}
+
+{% block linky_items_présentation %}
+{% endblock %}
+
+{% block linky_items %}
+<p class = "town_hall_linky_title">Bâtiments:<p>
+{% if single.barracks|first.batiment.name is defined %}
+  {% for barrack in single.barracks %}
+      <li class = "li_linky_items">
+        <a href="{{ path('her_barrack_single', {'level':barrack.level} ) }}">
+          <div class="li_div_linky_items">
+            <p class = "name_linky_items_over">{{ barrack.batiment.name }}</p>
+            <p class = "level_linky_items_bottom">{{ barrack.level }}</p>
+            {% if barrack.image is not null %}
+            <img class= "img_linky_items"
+            src="{{ asset(barrack.image.uploadDir ~ '/' ~ barrack.image.id ~ '.' ~ barrack.image.ext) }}"
+            alt="{{ barrack.image.alt }}"/>
+            {% else %}
+            <img class= "img_linky_items"
+            src="{{ asset('images/unavailable.png') }}"
+            alt="image non-disponible"/>
+            {% endif %}
+          </div>
+        </a>
+      </li>
+  {% endfor %}
+{% endif %}
+<!-- <div class="cut_li_inline"></div>
+<div class="clearfix"></div> -->
+{% if single.darkBarracks|first.batiment.name is defined %}
+  {% for darkBarrack in single.darkBarracks %}
+      <li class = "li_linky_items">
+        <a href="{{ path('her_dark_barrack_single', {'level':darkBarrack.level} ) }}">
+          <div class="li_div_linky_items">
+            <p class = "name_linky_items_over">{{ darkBarrack.batiment.name }}</p>
+            <p class = "level_linky_items_bottom">{{ darkBarrack.level }}</p>
+            {% if darkBarrack.image is not null %}
+            <img class= "img_linky_items"
+            src="{{ asset(darkBarrack.image.uploadDir ~ '/' ~ darkBarrack.image.id ~ '.' ~ darkBarrack.image.ext) }}"
+            alt="{{ darkBarrack.image.alt }}"/>
+            {% else %}
+            <img class= "img_linky_items"
+            src="{{ asset('images/unavailable.png') }}"
+            alt="image non-disponible"/>
+            {% endif %}
+          </div>
+        </a>
+      </li>
+  {% endfor %}
+{% endif %}
+<!-- <div class="cut_li_inline"></div>
+<div class="clearfix"></div> -->
+{% if single.laboratories|first.batiment.name is defined %}
+  {% for laboratory in single.laboratories %}
+      <li class = "li_linky_items">
+        <a href="{{ path('her_laboratory_single', {'level':laboratory.level} ) }}">
+          <div class="li_div_linky_items">
+            <p class = "name_linky_items_over">{{ laboratory.batiment.name }}</p>
+            <p class = "level_linky_items_bottom">{{ laboratory.level }}</p>
+            {% if laboratory.image is not null %}
+            <img class= "img_linky_items"
+            src="{{ asset(laboratory.image.uploadDir ~ '/' ~ laboratory.image.id ~ '.' ~ laboratory.image.ext) }}"
+            alt="{{ laboratory.image.alt }}"/>
+            {% else %}
+            <img class= "img_linky_items"
+            src="{{ asset('images/unavailable.png') }}"
+            alt="image non-disponible"/>
+            {% endif %}
+          </div>
+        </a>
+      </li>
+  {% endfor %}
+{% endif %}
+<!-- <div class="cut_li_inline"></div>
+<div class="clearfix"></div> -->
+{% if single.spellFactories|first.batiment.name is defined %}
+{% for spellFactory in single.spellFactories %}
+<li class = "li_linky_items">
+  <a href="{{ path('her_spell_factory_single', {'slug': spellFactory.batiment.slug, 'level':spellFactory.level} ) }}">
+    <div class="li_div_linky_items">
+      <p class = "name_linky_items_over">{{ spellFactory.batiment.name }}</p>
+      <p class = "level_linky_items_bottom">{{ spellFactory.level }}</p>
+      {% if spellFactory.image is not null %}
+      <img class= "img_linky_items"
+      src="{{ asset(spellFactory.image.uploadDir ~ '/' ~ spellFactory.image.id ~ '.' ~ spellFactory.image.ext) }}"
+      alt="{{ spellFactory.image.alt }}"/>
+      {% else %}
+      <img class= "img_linky_items"
+      src="{{ asset('images/unavailable.png') }}"
+      alt="image non-disponible"/>
+      {% endif %}
+    </div>
+  </a>
+</li>
+{% endfor %}
+{% endif %}
+{% if single.prods|first.batiment.name is defined %}
+{% for prod in single.prods %}
+<li class = "li_linky_items">
+  <a href="{{ path('her_prod_single', {'slug': prod.batiment.slug, 'level':prod.level} ) }}">
+    <div class="li_div_linky_items">
+      <p class = "name_linky_items_over">{{ prod.batiment.name }}</p>
+      <p class = "level_linky_items_bottom">{{ prod.level }}</p>
+      {% if prod.image is not null %}
+      <img class= "img_linky_items"
+      src="{{ asset(prod.image.uploadDir ~ '/' ~ prod.image.id ~ '.' ~ prod.image.ext) }}"
+      alt="{{ prod.image.alt }}"/>
+      {% else %}
+      <img class= "img_linky_items"
+      src="{{ asset('images/unavailable.png') }}"
+      alt="image non-disponible"/>
+      {% endif %}
+    </div>
+  </a>
+</li>
+{% endfor %}
+{% endif %}
+{% if single.stocks|first.batiment.name is defined %}
+{% for stock in single.stocks %}
+<li class = "li_linky_items">
+  <a href="{{ path('her_stock_single', {'slug': stock.batiment.slug, 'level':stock.level} ) }}">
+    <div class="li_div_linky_items">
+      <p class = "name_linky_items_over">{{ stock.batiment.name }}</p>
+      <p class = "level_linky_items_bottom">{{ stock.level }}</p>
+      {% if stock.image is not null %}
+      <img class= "img_linky_items"
+      src="{{ asset(stock.image.uploadDir ~ '/' ~ stock.image.id ~ '.' ~ stock.image.ext) }}"
+      alt="{{ stock.image.alt }}"/>
+      {% else %}
+      <img class= "img_linky_items"
+      src="{{ asset('images/unavailable.png') }}"
+      alt="image non-disponible"/>
+      {% endif %}
+    </div>
+  </a>
+</li>
+{% endfor %}
+{% endif %}
+<div class="cut_li_inline"></div>
+<div class="clearfix"></div>
+{% if single.weapons|first.generalWeapon.name is defined %}
+    <p class = "town_hall_linky_title">Défenses:<p3>
+  {% for weapon in single.weapons %}
+      <li class = "li_linky_items">
+        <a href="{{ path('her_weapon_single', {'slug': weapon.generalWeapon.slug, 'level':weapon.level} ) }}">
+          <div class="li_div_linky_items">
+            <p class = "name_linky_items_over">{{ weapon.generalWeapon.name }}</p>
+            <p class = "level_linky_items_bottom">{{ weapon.level }}</p>
+            {% if weapon.image is not null %}
+            <img class= "img_linky_items"
+            src="{{ asset(weapon.image.uploadDir ~ '/' ~ weapon.image.id ~ '.' ~ weapon.image.ext) }}"
+            alt="{{ weapon.image.alt }}"/>
+            {% else %}
+            <img class= "img_linky_items"
+            src="{{ asset('images/unavailable.png') }}"
+            alt="image non-disponible"/>
+            {% endif %}
+          </div>
+        </a>
+      </li>
+  {% endfor %}
+{% endif %}
+{% endblock %}

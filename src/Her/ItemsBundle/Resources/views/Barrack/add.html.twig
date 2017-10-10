@@ -1,0 +1,14 @@
+{# src/Her/ItemsBundle/Resources/views/Barrack/add.html.twig #}
+
+{% extends "HerItemsBundle::layout_default.html.twig" %}
+
+{% block body %}
+
+  {{ include("HerItemsBundle:Barrack:form.html.twig") }}
+
+  <p>
+    Attention : cette caserne sera ajoutée directement
+    sur la page d'accueil après validation du formulaire.
+  </p>
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "HerItemsBundle::layout_default.html.twig" %}
+{% block title %}
+{{ parent() }}
+  Accueil
+{% endblock %}
+{% block body %}
+  <h1>Liste des Bâtiments</h1>
+  <p>
+    <a href="{{ path('her_batiment_add') }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-plus"></i>
+      Ajouter un Bâtiment
+    </a>
+  </p>
+  <div class="clearfix"></div>
+  {% if singles is not null %}
+  <div class = "batiment_container">
+    <ul>
+      {% for single in singles %}
+          <li>
+            <div class="batiment">
+              <p class = "p_short_list" >{{ single.name }}</p>
+              <p class = "p_short_list" >Niveau Max: {{ single.maxLevel }}</p>
+              <p class = "p_short_list" >Espace: {{ single.space }} x {{ single.space }}</p>
+              <p class = "p_short_list" >Ressource: {{ single.resource.type }}</p>
+              <p class = "p_short_list" >Description:<br>{{ single.description }}</p>
+              <p>
+                {% if single.id == 2 %}
+                <a href="{{ path('her_town_hall_homepage', {'slug':single.slug} ) }}" class="btn btn-default">
+                {% elseif single.id == 3 %}
+                <a href="{{ path('her_barrack_homepage', {'slug':single.slug} ) }}" class="btn btn-default">
+                {% elseif single.id == 4 %}
+                <a href="{{ path('her_laboratory_homepage', {'slug':single.slug} ) }}" class="btn btn-default">
+                {% elseif single.id == 5 %}
+                <a href="{{ path('her_dark_barrack_homepage', {'slug':single.slug} ) }}" class="btn btn-default">
+                {% elseif single.id == 6 %}
+                <a href="{{ path('her_spell_factory_homepage', {'slug':single.slug} ) }}" class="btn btn-default">
+                {% elseif single.id == 7 %}
+                <a href="{{ path('her_dark_spell_factory_homepage', {'slug':single.slug} ) }}" class="btn btn-default">
+                {% elseif single.id == 8 %}
+                <a href="{{ path('her_prod_homepage', {'slug':single.slug} ) }}" class="btn btn-default">
+                {% elseif single.id == 9 %}
+                <a href="{{ path('her_prod_homepage', {'slug':single.slug} ) }}" class="btn btn-default">
+                {% elseif single.id == 10 %}
+                <a href="{# path('her_stock_homepage', {'slug':single.slug} ) #}" class="btn btn-default">
+                {% endif %}
+                  <i class="glyphicon glyphicon-search"></i>
+                  Aperçu
+                </a>
+              </p>
+              <p>
+                <a href="{{ path('her_batiment_edit', {'slug':single.name} ) }}" class="btn btn-default">
+                  <i class="glyphicon glyphicon-edit"></i>
+                  Modifier
+                </a>
+              </p>
+              <p>
+                <a href="{{ path('her_batiment_delete', {'slug': single.name}) }}" class="btn btn-danger">
+                  <i class="glyphicon glyphicon-trash"></i>
+                  Supprimer
+                </a>
+              </p>
+            </div>
+          </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,4 @@
+services:
+#    her_items.example:
+#        class: Her\ItemsBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

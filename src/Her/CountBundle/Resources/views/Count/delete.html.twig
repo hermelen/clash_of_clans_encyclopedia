@@ -1,0 +1,24 @@
+{% extends "HerItemsBundle::layout_default.html.twig" %}
+{% block title %}
+{{ parent() }}
+  Nettoyer Count
+{% endblock %}
+{% block left %}
+{% endblock %}
+
+{% block body %}
+
+<h1>Nettoyer le compteur</h1>
+<a href = "{{ path('her_count_clear_action', {'days': 0}) }}"><button type="button" name="button">+ de 1 an</button></a><br><br>
+<a href = "{{ path('her_count_clear_action', {'days': 0}) }}"><button type="button" name="button">+ de 6 mois</button></a><br><br>
+<a href = "{{ path('her_count_clear_action', {'days': 90}) }}"><button type="button" name="button">+ de 3 mois</button></a><br><br>
+<a href = "{{ path('her_count_clear_action', {'days': 30}) }}"><button type="button" name="button">+ de 1 mois</button></a><br><br>
+<a href = "{{ path('her_count_clear_action', {'days': 15}) }}"><button type="button" name="button">+ de 2 semaines</button></a><br><br>
+<a href = "{{ path('her_count_clear_action', {'days': 7}) }}"><button type="button" name="button">+ de 1 semaine</button></a><br><br>
+<a href = "{{ path('her_count_clear_action', {'days': 0}) }}"><button type="button" name="button">Tout effacer</button></a><br><br>
+<p>Pour définir précisément le nombre de jours au delà duquel l'historique doit être effacé, saisir le nombre de jours dans l'url après clear-count/</p>
+<p>Exemple: clear-count/10/ efface les visites datant de plus de 10 jours.</p>
+
+<script>
+</script>
+{% endblock %}

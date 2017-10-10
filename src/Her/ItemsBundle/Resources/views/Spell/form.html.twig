@@ -1,0 +1,129 @@
+{# src/Her/ItemsBundle/Resources/views/Spell/form.html.twig #}
+
+<div>
+  <h3>Formulaire Sort Niveau</h3>
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+        {{ form_errors(form) }}
+        {{ form_label(form.generalSpell, "Sort", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.generalSpell) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.generalSpell) }}
+        </div>
+        {{ form_label(form.level, "Niveau", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.level) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.level, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        {{ form_label(form.improvementCost, "Coût d'amélioration", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.improvementCost) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.improvementCost, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        {{ form_label(form.trainingCost, "Coût d'entraînement", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.trainingCost) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.trainingCost, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        {{ form_label(form.improvementDuration, "Durée d'amélioration", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.improvementDuration) }}
+        <div class="col-sm-3">
+          <div class="form-control durationDetailContainer" id="durationDetailContainer">
+          </div>
+        </div>
+        {{ form_label(form.attackDecrease, "Baisse fréquence d'attaques", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.attackDecrease) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.attackDecrease, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        {{ form_label(form.actionDuration, "Durée d'action du sort", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.actionDuration) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.actionDuration, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        {{ form_label(form.lifeDecrease, "Baisse point vie", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.lifeDecrease) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.lifeDecrease, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        {{ form_label(form.health, "Hausse point vie", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.health) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.health) }}
+        </div>
+        {{ form_label(form.speedDecrease, "Baisse de la vitesse", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.speedDecrease) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.speedDecrease, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        {{ form_label(form.speedImprovement, "Hausse de la vitesse", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.speedImprovement) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.speedImprovement, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        {{ form_label(form.healthPerImpulse, "Point vie/séquence", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.healthPerImpulse) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.healthPerImpulse) }}
+        </div>
+        {{ form_label(form.damagePerImpulse, "Dégâts/séquence", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.damagePerImpulse) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.damagePerImpulse, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        {{ form_label(form.damageImprovement, "Hausse puissance", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.damageImprovement) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.damageImprovement, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        {{ form_label(form.damagePerSecond, "Dégâts par seconde", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.damagePerSecond) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.damagePerSecond, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        {{ form_label(form.child, "Troupes générées (nb)", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.child) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.child, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        {{ form_label(form.damage, "Dégâts totaux", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.damage) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.damage, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        {{ form_label(form.laboratory, "Laboratoire requis", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.laboratory) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.laboratory, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="col-sm-12">
+          {{ form_widget(form.improvementDuration, {'attr': {'class': 'hide form-control improvementDuration'}}) }}
+        </div>
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-10">
+          {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+        </div>
+    {{ form_end(form) }}
+</div>
+
+<div class="hidden durationDetail" id="durationDetail">
+  <form class="form_duration"  action="#" method="post">
+    <table class="table_duration">
+      <tr>
+        <th class = "td_duration">Jours:</td>
+        <th class = "td_duration">Heures:</td>
+        <th class = "td_duration">Minutes:</td>
+        <th class = "td_duration">Secondes:</td>
+      </tr>
+      <tr>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="durationDays" id="durationDays" value="0"></td>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="durationHours" id="durationHours" value="0"></td>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="durationMinutes" id="durationMinutes" value="0"></td>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="durationSeconds" id="durationSeconds" value="0"></td>
+      </tr>
+      <td><button class = "btn-danger"type="button" id="submitDuration" name="submitDuration button">Valider Durée Amélioration</button></td>
+    </table>
+  </form>
+</div>
+
+<div class="clearfix"></div>

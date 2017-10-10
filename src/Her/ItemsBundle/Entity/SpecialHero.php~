@@ -1,0 +1,92 @@
+<?php
+
+namespace Her\ItemsBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * SpecialHero
+ *
+ * @ORM\Table(name="coc_special_hero")
+ * @ORM\Entity(repositoryClass="Her\ItemsBundle\Repository\SpecialHeroRepository")
+ */
+class SpecialHero
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="level", type="smallint", nullable=true)
+     */
+    private $level;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="damageImprovement", type="smallint", nullable=true)
+     */
+    private $damageImprovement;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="lifeImprovement", type="smallint", nullable=true)
+     */
+    private $lifeImprovement;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="speedImprovement", type="smallint", nullable=true)
+     */
+    private $speedImprovement;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="child", type="smallint", nullable=true)
+     */
+    private $child;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="specialDuration", type="integer")
+     */
+    private $specialDuration;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="lifePercent", type="smallint", nullable=true)
+     */
+    private $lifePercent;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="maxLifeImprovement", type="smallint", nullable=true)
+     */
+    private $maxLifeImprovement;
+
+    /**
+    * @ORM\ManyToOne(targetEntity="Her\ItemsBundle\Entity\GeneralSpecialHero", inversedBy = "specialHeros")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $generalSpecialHero;
+
+    /**
+    * @ORM\OneToMany(targetEntity="Her\ItemsBundle\Entity\Troop", mappedBy = "specialHero")
+    * @ORM\JoinColumn(nullable=true)
+    */
+    private $heroLevels;
+
+}

@@ -1,0 +1,41 @@
+@special: rgb(216, 251, 4);
+@black: rgb(42, 42, 42);
+@none: rgba(0, 0, 0, 0);
+@lightGrey: rgb(232, 232, 224);//from COC
+@middleGrey: rgb(187, 187, 187);//from COC
+@middleGreyPlus: rgb(160, 160, 160);
+@heavyGreyLess: rgb(130, 130, 130);
+@heavyGrey : rgb(94, 84, 80);//from COC
+@heavyGreyTrans : rgba(94, 84, 80, 0.5);//from COC
+@heavyGreyPlus : rgb(80, 80, 80);
+@flashGreen: rgb(64, 172, 0);
+@freshBlue: rgb(33, 153, 255);
+@elixirPurple: rgb(230, 80, 249);
+@elixirHeavyPurple: rgb(116, 5, 131);
+@elixirTransparency: rgba(116, 5, 131, 0.3);
+@gold: rgb(255, 202, 43);
+@textShadowNone:  1px -1px @none, 1px 0px @none, 1px 1px @none, -1px -1px @none, -1px 0px @none, -1px 1px @none, 0px -1px @none, 0px 1px @none;
+@textShadowBlack: 1px -1px @black, 1px 0px @black, 1px 1px @black, -1px -1px @black, -1px 0px @black, -1px 1px @black, 0px -1px @black, 0px 1px @black;
+// @jauge_elixir: linear-gradient(@elixirPurple, white, @elixirPurple 50%);
+// @jauge_dark: linear-gradient(black, white, black 50%);
+// @jauge_gold: linear-gradient(@gold, white, @gold 50%);
+// @jauge_default: linear-gradient(@flashGreen, white, @flashGreen 50%);
+// @jauge_gold_elixir: linear-gradient(@gold, white,@elixirPurple, @gold 70%, @gold);
+@jauge_gold_elixir: linear-gradient(90deg, @gold, @gold 40%, @elixirPurple 60%, @elixirPurple);
+// @jauge_transparency: linear-gradient(rgba(0, 0, 0, 0), white, rgba(0, 0, 0, 0) 50%);
+// @jauge_transparency: linear-gradient(rgba(0, 0, 0, 0), white, rgba(0, 0, 0, 0) 50%);
+//general
+
+//general
+// .nav_right, .nav_left{
+//   padding: 0;
+// }
+.coc_footer{
+  display: block;
+  padding: 1em;
+  background-color: @middleGrey;
+  margin-top: 2em;
+  div{
+    text-align: center;
+  }
+}

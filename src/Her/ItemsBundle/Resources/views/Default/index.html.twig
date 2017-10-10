@@ -1,0 +1,16 @@
+{% extends "HerItemsBundle::layout_default.html.twig" %}
+{% block title %}
+{{ parent() }}
+  Accueil toto
+{% endblock %}
+{% block body %}
+  Accueil
+{% endblock %}
+{% block item_links %}
+<p>
+  <a href="{{ path('her_batiment_homepage') }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-plus"></i>
+    Voir les Bâtiments
+  </a>
+</p>
+{% endblock %}

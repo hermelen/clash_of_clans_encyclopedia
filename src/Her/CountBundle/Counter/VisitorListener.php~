@@ -1,0 +1,153 @@
+<?php
+
+namespace Her\CountBundle\Counter;
+
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+
+use Her\CountBundle\Entity\Visitor;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
+
+class VisitorListener
+{
+  protected $processeur;
+  protected $visitor;
+  protected $requestStack;
+
+  public function __construct(VisitorCounter $processeur, RequestStack $requestStack)
+  {
+    $this->processeur = $processeur;
+    $this->requestStack = $requestStack;
+
+    $request = $this->requestStack->getCurrentRequest();
+
+    $ip = $request->getClientIp();
+        if($ip == 'unknown'){
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+
+    // function getBrowserType() {
+        if (!empty($_SERVER['HTTP_USER_AGENT']))
+        {
+           $HTTP_USER_AGENT = $_SERVER['HTTP_USER_AGENT'];
+        }
+        else if (!empty($HTTP_SERVER_VARS['HTTP_USER_AGENT']))
+        {
+           $HTTP_USER_AGENT = $HTTP_SERVER_VARS['HTTP_USER_AGENT'];
+        }
+        else if (!isset($HTTP_USER_AGENT))
+        {
+           $HTTP_USER_AGENT = '';
+        }
+        if (ereg('Opera(/| )([0-9].[0-9]{1,2})', $HTTP_USER_AGENT, $log_version))
+        {
+           $browser_version = $log_version[2];
+           $browser_agent = 'opera';
+        }
+        else if (ereg('MSIE ([0-9].[0-9]{1,2})', $HTTP_USER_AGENT, $log_version))
+        {
+           $browser_version = $log_version[1];
+           $browser_agent = 'ie';
+        }
+        else if (ereg('OmniWeb/([0-9].[0-9]{1,2})', $HTTP_USER_AGENT, $log_version))
+        {
+           $browser_version = $log_version[1];
+           $browser_agent = 'omniweb';
+        }
+        else if (ereg('Netscape([0-9]{1})', $HTTP_USER_AGENT, $log_version))
+        {
+           $browser_version = $log_version[1];
+           $browser_agent = 'netscape';
+        }
+        else if (ereg('Mozilla/([0-9].[0-9]{1,2})', $HTTP_USER_AGENT, $log_version))
+        {
+           $browser_version = $log_version[1];
+           $browser_agent = 'mozilla';
+        }
+        else if (ereg('Konqueror/([0-9].[0-9]{1,2})', $HTTP_USER_AGENT, $log_version))
+        {
+           $browser_version = $log_version[1];
+           $browser_agent = 'konqueror';
+        }
+        else
+        {
+           $browser_version = 0;
+           $browser_agent = 'other';
+        }
+    //     return $browser_agent;
+    //     // return $browser = $browser_agent;
+    // }
+
+    $browser = $browser_agent;
+    // $browser = preg_match_all('/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i', $_SERVER['HTTP_USER_AGENT']);
+    $hour = date("h");
+    $minute = date("i");
+    $day = date("d");
+    $month = date("m");
+    $year = date("y");
+    $referer = $request->get('http-referer');
+
+    // function selfURL() {
+        $s = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ? "s" : "";
+        // $protocol = strleft(strtolower($_SERVER["SERVER_PROTOCOL"]), "/").$s;
+        $protocol = substr(strtolower($_SERVER["SERVER_PROTOCOL"]), 0, strpos(strtolower($_SERVER["SERVER_PROTOCOL"]), "/")).$s;
+        $port = ($_SERVER["SERVER_PORT"] == "80") ? "" : (":".$_SERVER["SERVER_PORT"]);
+        $page = $protocol."://".$_SERVER['SERVER_NAME'].$port.$_SERVER['REQUEST_URI'];
+        // return $protocol."://".$_SERVER['SERVER_NAME'].$port.$_SERVER['REQUEST_URI'];
+    // }
+    // function strleft($s1, $s2) {
+    //     return substr($s1, 0, strpos($s1, $s2));
+    // }
+
+    // function strleft($s1, $s2) {
+    //     return substr($s1, 0, strpos($s1, $s2));
+    // }
+
+    // $page = selfURL();
+
+    // $visitor_data = array(
+    //   $ip,
+    //   $browser,
+    //   $hour,
+    //   $minute,
+    //   $day,
+    //   $month,
+    //   $year,
+    //   $referer,
+    //   $page,
+    // );
+    $visitor = new Visitor();
+    $visitor->setIP($ip);
+    $visitor->setBrowser($browser);
+    $visitor->setHour($hour);
+    $visitor->setMinute($minute);
+    $visitor->setDay($day);
+    $visitor->setMonth($month);
+    $visitor->setYear($year);
+    $visitor->setReferer($referer);
+    $visitor->setPage($page);
+
+    $this->visitor = $visitor;
+  }
+
+  // public function processAddVisitor()
+  // {
+  //   if ($visitor->getIp() !== null) {
+  //     // Si la date est dépassée, on ne fait rien
+  //     return;
+  //   }
+
+  // L'argument de la méthode est un FilterResponseEvent
+  public function processAddVisitor(FilterResponseEvent $event)
+  {
+    // On teste si la requête est bien la requête principale (et non une sous-requête)
+    if (!$event->isMasterRequest()) {
+      return;
+    }
+
+    $response = $this->processeur->addVisitor($event->getResponse(), $this->visitor);
+
+    $event->setResponse($response);
+  }
+}

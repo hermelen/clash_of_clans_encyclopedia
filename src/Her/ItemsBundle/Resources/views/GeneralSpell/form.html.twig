@@ -1,0 +1,141 @@
+{# src/Her/ItemsBundle/Resources/views/Troop/form.html.twig #}
+
+<div>
+  <h3>Formulaire Sorts</h3>
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+      <h2>Informations Générales</h2>
+        {{ form_errors(form) }}
+
+        {{ form_label(form.name, "Nom (minuscule singulier)", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+        {{ form_errors(form.name) }}
+        <div class="col-sm-2">
+          {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.maxLevel, "Niveau Maximum", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+        {{ form_errors(form.maxLevel) }}
+        <div class="col-sm-2">
+          {{ form_widget(form.maxLevel, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.space, "Espace occupé", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+        {{ form_errors(form.space) }}
+        <div class="col-sm-2">
+          {{ form_widget(form.space, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.spellFactory, "Usine(1->5 Classic puis 1->4 Dark)", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+        {{ form_errors(form.spellFactory) }}
+        <div class="col-sm-2">
+          {{ form_widget(form.spellFactory, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.damageArea, "Rayon d'action", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+        {{ form_errors(form.damageArea) }}
+        <div class="col-sm-2">
+          {{ form_widget(form.damageArea) }}
+        </div>
+
+        {{ form_label(form.trainingDuration, "Durée de concoction", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+        {{ form_errors(form.trainingDuration) }}
+        <div class="col-sm-2">
+          <div class="form-control trainingDurationDetailContainer" id="trainingDurationDetailContainer">
+          </div>
+        </div>
+
+        {{ form_label(form.targetType, "Cible Préférée", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+        {{ form_errors(form.targetType) }}
+        <div class="col-sm-2">
+          {{ form_widget(form.targetType, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.randomDamageArea, "Rayon d'action aléatoires", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+        {{ form_errors(form.randomDamageArea) }}
+        <div class="col-sm-2">
+          {{ form_widget(form.randomDamageArea) }}
+        </div>
+
+        {{ form_label(form.actionDuration, "Durée du sort", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+        {{ form_errors(form.actionDuration) }}
+        <div class="col-sm-2">
+          {{ form_widget(form.actionDuration, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.impulseNumber, "Nombre d'impulsions", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+        {{ form_errors(form.impulseNumber) }}
+        <div class="col-sm-2">
+          {{ form_widget(form.impulseNumber, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+
+        {{ form_label(form.child, "Nombre troupes générées", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+        {{ form_errors(form.child) }}
+        <div class="col-sm-2">
+          {{ form_widget(form.child, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.impulseDuration, "Durée de l'impulsion", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+        {{ form_errors(form.impulseDuration) }}
+        <div class="col-sm-2">
+          {{ form_widget(form.impulseDuration, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+
+
+        {{ form_label(form.cloneDuration, "Longévité des clones", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+        {{ form_errors(form.cloneDuration) }}
+        <div class="col-sm-2">
+          {{ form_widget(form.cloneDuration, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+
+
+
+        {{ form_label(form.resource, "Resource utilisée", {'label_attr': {'class': 'col-sm-4 control-label'}}) }}
+        {{ form_errors(form.resource) }}
+        <div class="col-sm-2">
+          {{ form_widget(form.resource) }}
+        </div>
+
+        {{ form_label(form.description, "Description", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.description) }}
+        <div class="col-sm-10">
+          {{ form_widget(form.description, {'attr': {'class': 'form-control', 'rows' : '10'}}) }}
+        </div>
+
+        {{ form_label(form.image, "Image", {'label_attr': {'class': 'col-sm-4 control-label', 'required': false}}) }}
+        {{ form_errors(form.image) }}
+        <div class="col-sm-2">
+          {{ form_widget(form.image) }}
+        </div>
+
+        <div class="col-sm-42">
+          {{ form_widget(form.trainingDuration, {'attr': {'class': 'hide form-control trainingDuration'}}) }}
+        </div>
+
+        <div class="col-sm-4">
+        </div>
+        <div class="col-sm-40">
+          {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+        </div>
+
+    {{ form_end(form) }}
+</div>
+
+<div class="hidden durationDetail" id="trainingDurationDetail">
+  <form class="form_duration"  action="#" method="post">
+    <table class="table_duration">
+      <tr>
+        <th class = "td_duration">Minutes:</td>
+        <th class = "td_duration">Secondes:</td>
+      </tr>
+      <tr>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="durationMinutes" id="trainingDurationMinutes" value="0"></td>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="durationSeconds" id="trainingDurationSeconds" value="0"></td>
+      </tr>
+      <td><button class = "btn-danger"type="button" id="submitTrainingDuration" name="submitDuration button">Valider Durée Concoction</button></td>
+    </table>
+  </form>
+</div>
+
+<div class="clearfix"></div>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Clash of Clans{% endblock %}</title>
+        {% block stylesheets %}
+          <link rel="stylesheet" href="{{ asset('bootstrap/bootstrap.min.css') }}" />
+          <link rel="stylesheet" href="{{ asset('css/clash_of_clans.min.css') }}">
+          <link rel="stylesheet" href="{{ asset('fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+      <div class="container container_body">
+        </div>
+        {% block nav %}
+        {# include "HerItemsBundle::nav.html.twig" #}
+        <div class="coc_nav">
+        {{ render(controller(
+              'HerItemsBundle:Nav:nav'
+          )) }}
+        </div>
+        {% endblock %}
+
+        {% block body %}
+        {% endblock %}
+        
+        {% if is_granted('ROLE_ADMIN') %}
+          {% block item_links %}
+          {% endblock %}
+        {% endif %}
+
+        {% block footer %}
+          <div class="coc_footer">
+            <p>Site hermelen.com/clash_of_clans Copyright 2017</p>
+          </div>
+        {% endblock %}
+
+          {% block javascripts %}
+            <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/clash_of_clans.min.js') }}"></script>
+          {% endblock %}
+        </div>
+    </body>
+</html>

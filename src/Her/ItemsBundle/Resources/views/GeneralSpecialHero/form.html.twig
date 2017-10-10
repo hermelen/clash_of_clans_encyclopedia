@@ -1,0 +1,54 @@
+{# src/Her/ItemsBundle/Resources/views/Troop/form.html.twig #}
+
+<div>
+  <h3>Formulaire Troupes</h3>
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+      <h2>Informations Générales</h2>
+        {{ form_errors(form) }}
+
+        {{ form_label(form.name, "Nom (minuscule singulier)", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.name) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.maxLevel, "Niveau Maximum", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.maxLevel) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.maxLevel, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.description, "Description", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.description) }}
+        <div class="col-sm-10">
+          {{ form_widget(form.description, {'attr': {'class': 'form-control', 'rows' : '10'}}) }}
+        </div>
+
+        {{ form_label(form.generalTroop, "Héro", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.generalTroop) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.generalTroop, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.childTroop, "Troupes générées", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.childTroop) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.childTroop, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        {{ form_label(form.image, "Image", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.image) }}
+        <div class="col-sm-3">
+          {{ form_widget(form.image) }}
+        </div>
+
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-10">
+          {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+        </div>
+
+    {{ form_end(form) }}
+</div>
+
+<div class="clearfix"></div>

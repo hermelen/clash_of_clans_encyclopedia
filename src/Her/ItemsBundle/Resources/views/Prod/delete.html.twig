@@ -1,0 +1,29 @@
+{# src/Her/ItemsBundle/Resources/views/Prod/delete.html.twig #}
+
+{% extends "HerItemsBundle::layout_default.html.twig" %}
+
+{% block title %}
+  Supprimer: {{ single.batiment.name }}/{{ single.level }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+  <h2>Supprimer: {{ single.batiment.name }} niveau {{ single.level }} </h2>
+
+  <p>
+    Etes-vous certain de vouloir supprimer: {{ single.batiment.name }} niveau {{ single.level }} ?
+  </p>
+
+  {# On met l'id de l'annonce dans la route de l'action du formulaire #}
+  <form action="{{ path('her_prod_delete', {'batiment_slug': single.batiment.slug, 'prod_level': single.level}) }}" method="post">
+    <a href="{{ path('her_prod_single', {'batiment_slug': single.batiment.slug, 'prod_level': single.level }) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour au {{ single.batiment.name }} niveau {{ single.level }}
+    </a>
+    {# Ici j'ai écrit le bouton de soumission à la main #}
+    <input type="submit" value="Supprimer" class="btn btn-danger" />
+    {# Ceci va générer le champ CSRF #}
+    {{ form_rest(form) }}
+  </form>
+
+{% endblock %}

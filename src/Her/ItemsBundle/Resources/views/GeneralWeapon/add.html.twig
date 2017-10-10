@@ -1,0 +1,14 @@
+{# src/Her/ItemsBundle/Resources/views/GeneralWeapon/add.html.twig #}
+
+{% extends "HerItemsBundle::layout_default.html.twig" %}
+
+{% block body %}
+
+  {{ include("HerItemsBundle:GeneralWeapon:form.html.twig") }}
+
+  <p>
+    Attention : Cette arme sera ajoutée directement
+    sur la page d'accueil après validation du formulaire.
+  </p>
+
+{% endblock %}

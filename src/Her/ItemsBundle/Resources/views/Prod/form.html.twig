@@ -1,0 +1,133 @@
+{# src/Her/ItemsBundle/Resources/views/Prod/form.html.twig #}
+
+<div>
+  <h3>Formulaire ressource</h3>
+  {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+    {{ form_errors(form) }}
+
+    {{ form_label(form.batiment, "Batiment", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+    {{ form_errors(form.batiment) }}
+    <div class="col-sm-3">
+      {{ form_widget(form.batiment, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    {{ form_label(form.level, "Niveau", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+    {{ form_errors(form.level) }}
+    <div class="col-sm-3">
+      {{ form_widget(form.level, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    {{ form_label(form.improvementCost, "Coût d'amélioration", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+    {{ form_errors(form.improvementCost) }}
+    <div class="col-sm-3">
+      {{ form_widget(form.improvementCost, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    {{ form_label(form.improvementDuration, "Durée d'amélioration", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+    {{ form_errors(form.improvementDuration) }}
+    <div class="col-sm-3">
+      <div class="form-control durationDetailContainer" id="durationDetailContainer">
+      </div>
+    </div>
+
+    {{ form_label(form.exp, "Expérience acquise", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+    {{ form_errors(form.exp) }}
+    <div class="col-sm-3">
+      {{ form_widget(form.exp, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    {{ form_label(form.capacity, "Capacité de stockage", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+    {{ form_errors(form.capacity) }}
+    <div class="col-sm-3">
+      {{ form_widget(form.capacity) }}
+    </div>
+
+    {{ form_label(form.productivity, "Volume par heure", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+    {{ form_errors(form.productivity) }}
+    <div class="col-sm-3">
+      {{ form_widget(form.productivity, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    {{ form_label(form.life, "Points de vie", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+    {{ form_errors(form.life) }}
+    <div class="col-sm-3">
+      {{ form_widget(form.life, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    {{ form_label(form.full, "Durée de remplissage", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+    {{ form_errors(form.full) }}
+    <div class="col-sm-3">
+      <div class="form-control fullDurationDetailContainer" id="fullDurationDetailContainer">
+      </div>
+    </div>
+
+    {{ form_label(form.townHall, "Hotel de Ville requis", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+    {{ form_errors(form.townHall) }}
+    <div class="col-sm-3">
+      {{ form_widget(form.townHall) }}
+    </div>
+
+    {{ form_label(form.image, "Image", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+    {{ form_errors(form.image) }}
+    <div class="col-sm-3">
+      {{ form_widget(form.image) }}
+    </div>
+
+    <div class="col-sm-12">
+      {{ form_widget(form.improvementDuration, {'attr': {'class': 'hide form-control improvementDuration'}}) }}
+    </div>
+
+    <div class="col-sm-12">
+      {{ form_widget(form.full, {'attr': {'class': 'hide form-control fullDuration'}}) }}
+    </div>
+
+    <div class="col-sm-3">
+    </div>
+    <div class="col-sm-9">
+      {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+    </div>
+
+  {{ form_end(form) }}
+</div>
+
+<div class="hidden DurationDetail" id="durationDetail">
+  <form class="form_duration"  action="#" method="post">
+    <table class="table_duration">
+      <tr>
+        <th class = "td_duration">Jours:</td>
+        <th class = "td_duration">Heures:</td>
+        <th class = "td_duration">Minutes:</td>
+        <th class = "td_duration">Secondes:</td>
+      </tr>
+      <tr>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="durationDays" id="durationDays" value="0"></td>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="durationHours" id="durationHours" value="0"></td>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="durationMinutes" id="durationMinutes" value="0"></td>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="durationSeconds" id="durationSeconds" value="0"></td>
+      </tr>
+      <td><button class = "btn-danger"type="button" id="submitDuration" name="submitDuration button">Valider Durée Amélioration</button></td>
+    </table>
+  </form>
+</div>
+
+<div class="hidden fullDurationDetail" id="fullDurationDetail">
+  <form class="form_duration"  action="#" method="post">
+    <table class="table_duration">
+      <tr>
+        <th class = "td_duration">Jours:</td>
+        <th class = "td_duration">Heures:</td>
+        <th class = "td_duration">Minutes:</td>
+        <th class = "td_duration">Secondes:</td>
+      </tr>
+      <tr>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="fullDurationDays" id="fullDurationDays" value="0"></td>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="fullDurationHours" id="fullDurationHours" value="0"></td>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="fullDurationMinutes" id="fullDurationMinutes" value="0"></td>
+        <td class = "td_duration"><input class = "input_duration" type="number" name="fullDurationSeconds" id="fullDurationSeconds" value="0"></td>
+      </tr>
+      <td><button class = "btn-danger"type="button" id="submitFullDuration" name="submitDuration button">Valider Durée Remplissage</button></td>
+    </table>
+  </form>
+</div>
+
+<div class="clearfix"></div>

@@ -1,0 +1,62 @@
+{% extends "HerItemsBundle::layout_items.html.twig" %}
+{% block title %}
+{{ parent() }}
+  Sorts
+{% endblock %}
+{% block single_image %}
+      <div id="carousel" class="carousel slide carousel-fade" data-ride="carousel">
+
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#carousel" data-slide-to="0" class="her_li_indicator active">
+          <a class="" href="#carousel" role="button" data-slide="0"></a>
+        </li>
+      {% for i in 1.. singles|length - 1 %}
+        <li data-target="#carousel" data-slide-to="{{i}}" class="her_li_indicator">
+          <a class="" href="#carousel" role="button" data-slide="{{ i }}"></a>
+        </li>
+      {% endfor %}
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div class="active item">
+          <img src="{{ asset(singles[0].image.uploadDir ~ '/' ~ singles[0].image.id ~ '.' ~ singles[0].image.ext) }}" alt="{{ singles[0].image.alt }}">
+          <div class="carousel-caption">
+            <a href="{{ path('her_general_spell_single', {'slug':singles[0].slug} ) }}">
+              <p>Accéder à sort {{ singles[0].name }}</p>
+            </a>
+          </div>
+        </div>
+        {% for i in 1.. singles|length - 1 %}
+        <div class="item">
+          <img src="{{ asset(singles[i].image.uploadDir ~ '/' ~ singles[i].image.id ~ '.' ~ singles[i].image.ext) }}" alt="{{ singles[i].image.alt }}">
+          <div class="carousel-caption">
+            <a href="{{ path('her_general_spell_single', {'slug': singles[i].slug } ) }}">
+              <p>Accéder à sort {{ singles[i].name }}</p>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+      </a>
+      </div>
+{% endblock %}
+
+{% block item_links %}
+<p>
+  <a href="{{ path('her_general_spell_add') }}" class="btn btn-default">
+    <i class="glyphicon glyphicon-plus"></i>
+    Ajouter un sort
+  </a>
+</p>
+{% endblock %}

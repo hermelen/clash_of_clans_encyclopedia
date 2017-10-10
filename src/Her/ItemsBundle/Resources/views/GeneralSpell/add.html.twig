@@ -1,0 +1,14 @@
+{# src/Her/ItemsBundle/Resources/views/GeneralSpell/add.html.twig #}
+
+{% extends "HerItemsBundle::layout_default.html.twig" %}
+
+{% block body %}
+
+  {{ include("HerItemsBundle:GeneralSpell:form.html.twig") }}
+
+  <p>
+    Attention : ce sort sera ajoutée directement
+    sur la page d'accueil après validation du formulaire.
+  </p>
+
+{% endblock %}
