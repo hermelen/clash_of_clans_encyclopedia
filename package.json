@@ -1,0 +1,27 @@
+{
+  "name": "clash_of_clans",
+  "version": "1.0.0",
+  "description": "Best Clash of Clans wiki ever!",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "clash",
+    "of",
+    "clans",
+    "coc",
+    "supercell"
+  ],
+  "author": "Hermelen PERIS",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-less": "^1.4.1",
+    "grunt-contrib-uglify": "^3.0.1",
+    "grunt-contrib-watch": "^1.0.0"
+  }
+}

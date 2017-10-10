@@ -1,0 +1,213 @@
+Action',));
+                }
+
+                // her_barrack_delete
+                if (0 === strpos($pathinfo, '/armee/casernes/caserne/supprimer') && preg_match('#^/armee/casernes/caserne/supprimer/(?P<level>[^/]++)/?$#s', $pathinfo, $matches)) {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'her_barrack_delete');
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'her_barrack_delete')), array (  '_controller' => 'Her\\ItemsBundle\\Controller\\BarrackController::deleteAction',));
+                }
+
+                if (0 === strpos($pathinfo, '/armee/casernes/caserne-noire')) {
+                    // her_dark_barrack_homepage
+                    if (rtrim($pathinfo, '/') === '/armee/casernes/caserne-noire') {
+                        if (substr($pathinfo, -1) !== '/') {
+                            return $this->redirect($pathinfo.'/', 'her_dark_barrack_homepage');
+                        }
+
+                        return array (  '_controller' => 'Her\\ItemsBundle\\Controller\\DarkBarrackController::indexAction',  '_route' => 'her_dark_barrack_homepage',);
+                    }
+
+                    // her_dark_barrack_single
+                    if (preg_match('#^/armee/casernes/caserne\\-noire/(?P<level>\\d+)/?$#s', $pathinfo, $matches)) {
+                        if (substr($pathinfo, -1) !== '/') {
+                            return $this->redirect($pathinfo.'/', 'her_dark_barrack_single');
+                        }
+
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'her_dark_barrack_single')), array (  '_controller' => 'Her\\ItemsBundle\\Controller\\DarkBarrackController::singleAction',  'level' => 1,));
+                    }
+
+                    // her_dark_barrack_form
+                    if (rtrim($pathinfo, '/') === '/armee/casernes/caserne-noire/ajouter') {
+                        if (substr($pathinfo, -1) !== '/') {
+                            return $this->redirect($pathinfo.'/', 'her_dark_barrack_form');
+                        }
+
+                        return array (  '_controller' => 'Her\\ItemsBundle\\Controller\\DarkBarrackController::addAction',  '_route' => 'her_dark_barrack_form',);
+                    }
+
+                    // her_dark_barrack_edit
+                    if (0 === strpos($pathinfo, '/armee/casernes/caserne-noire/modifier') && preg_match('#^/armee/casernes/caserne\\-noire/modifier/(?P<level>[^/]++)/?$#s', $pathinfo, $matches)) {
+                        if (substr($pathinfo, -1) !== '/') {
+                            return $this->redirect($pathinfo.'/', 'her_dark_barrack_edit');
+                        }
+
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'her_dark_barrack_edit')), array (  '_controller' => 'Her\\ItemsBundle\\Controller\\DarkBarrackController::editAction',));
+                    }
+
+                    // her_dark_barrack_delete
+                    if (0 === strpos($pathinfo, '/armee/casernes/caserne-noire/supprimer') && preg_match('#^/armee/casernes/caserne\\-noire/supprimer/(?P<level>[^/]++)/?$#s', $pathinfo, $matches)) {
+                        if (substr($pathinfo, -1) !== '/') {
+                            return $this->redirect($pathinfo.'/', 'her_dark_barrack_delete');
+                        }
+
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'her_dark_barrack_delete')), array (  '_controller' => 'Her\\ItemsBundle\\Controller\\DarkBarrackController::deleteAction',));
+                    }
+
+                }
+
+            }
+
+        }
+
+        if (0 === strpos($pathinfo, '/hotel-de-ville')) {
+            // her_town_hall_homepage
+            if (rtrim($pathinfo, '/') === '/hotel-de-ville') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'her_town_hall_homepage');
+                }
+
+                return array (  '_controller' => 'Her\\ItemsBundle\\Controller\\TownHallController::indexAction',  '_route' => 'her_town_hall_homepage',);
+            }
+
+            // her_town_hall_single
+            if (preg_match('#^/hotel\\-de\\-ville/(?P<level>\\d+)/?$#s', $pathinfo, $matches)) {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'her_town_hall_single');
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'her_town_hall_single')), array (  '_controller' => 'Her\\ItemsBundle\\Controller\\TownHallController::singleAction',  'level' => 1,));
+            }
+
+            // her_town_hall_form
+            if (rtrim($pathinfo, '/') === '/hotel-de-ville/ajouter') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'her_town_hall_form');
+                }
+
+                return array (  '_controller' => 'Her\\ItemsBundle\\Controller\\TownHallController::addAction',  '_route' => 'her_town_hall_form',);
+            }
+
+            // her_town_hall_edit
+            if (0 === strpos($pathinfo, '/hotel-de-ville/modifier') && preg_match('#^/hotel\\-de\\-ville/modifier/(?P<level>[^/]++)/?$#s', $pathinfo, $matches)) {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'her_town_hall_edit');
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'her_town_hall_edit')), array (  '_controller' => 'Her\\ItemsBundle\\Controller\\TownHallController::editAction',));
+            }
+
+            // her_town_hall_delete
+            if (0 === strpos($pathinfo, '/hotel-de-ville/supprimer') && preg_match('#^/hotel\\-de\\-ville/supprimer/(?P<level>[^/]++)/?$#s', $pathinfo, $matches)) {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'her_town_hall_delete');
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'her_town_hall_delete')), array (  '_controller' => 'Her\\ItemsBundle\\Controller\\TownHallController::deleteAction',));
+            }
+
+        }
+
+        if (0 === strpos($pathinfo, '/armee/troupes')) {
+            // her_general_troop_homepage
+            if (rtrim($pathinfo, '/') === '/armee/troupes') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'her_general_troop_homepage');
+                }
+
+                return array (  '_controller' => 'Her\\ItemsBundle\\Controller\\GeneralTroopController::indexAction',  '_route' => 'her_general_troop_homepage',);
+            }
+
+            // her_general_troop_form
+            if (rtrim($pathinfo, '/') === '/armee/troupes/ajouter') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'her_general_troop_form');
+                }
+
+                return array (  '_controller' => 'Her\\ItemsBundle\\Controller\\GeneralTroopController::addAction',  '_route' => 'her_general_troop_form',);
+            }
+
+            // her_general_troop_edit
+            if (0 === strpos($pathinfo, '/armee/troupes/modifier') && preg_match('#^/armee/troupes/modifier/(?P<name>[^/]++)/?$#s', $pathinfo, $matches)) {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'her_general_troop_edit');
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'her_general_troop_edit')), array (  '_controller' => 'Her\\ItemsBundle\\Controller\\GeneralTroopController::editAction',));
+            }
+
+            // her_general_troop_delete
+            if (0 === strpos($pathinfo, '/armee/troupes/supprimer') && preg_match('#^/armee/troupes/supprimer/(?P<name>[^/]++)/?$#s', $pathinfo, $matches)) {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'her_general_troop_delete');
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'her_general_troop_delete')), array (  '_controller' => 'Her\\ItemsBundle\\Controller\\GeneralTroopController::deleteAction',));
+            }
+
+            // her_general_troop_single
+            if (preg_match('#^/armee/troupes/(?P<name>[^/]++)/?$#s', $pathinfo, $matches)) {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'her_general_troop_single');
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'her_general_troop_single')), array (  '_controller' => 'Her\\ItemsBundle\\Controller\\GeneralTroopController::singleAction',  'requirements' =>   array (    'name' => '^(?!ajouter|modifier|supprimer).+',  ),));
+            }
+
+            // her_troop_form
+            if (0 === strpos($pathinfo, '/armee/troupes/ajouter') && preg_match('#^/armee/troupes/ajouter/(?P<name>[^/]++)/?$#s', $pathinfo, $matches)) {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'her_troop_form');
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'her_troop_form')), array (  '_controller' => 'Her\\ItemsBundle\\Controller\\TroopController::addAction',));
+            }
+
+            // her_troop_edit
+            if (0 === strpos($pathinfo, '/armee/troupes/modifier') && preg_match('#^/armee/troupes/modifier/(?P<name>[^/]++)/(?P<level>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'her_troop_edit')), array (  '_controller' => 'Her\\ItemsBundle\\Controller\\TroopController::editAction',));
+            }
+
+            // her_troop_delete
+            if (0 === strpos($pathinfo, '/armee/troupes/supprimer') && preg_match('#^/armee/troupes/supprimer/(?P<name>[^/]++)/(?P<level>[^/]++)/?$#s', $pathinfo, $matches)) {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'her_troop_delete');
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'her_troop_delete')), array (  '_controller' => 'Her\\ItemsBundle\\Controller\\TroopController::deleteAction',));
+            }
+
+            // her_troop_single
+            if (preg_match('#^/armee/troupes/(?P<name>[^/]++)/(?P<level>[^/]++)/?$#s', $pathinfo, $matches)) {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'her_troop_single');
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'her_troop_single')), array (  '_controller' => 'Her\\ItemsBundle\\Controller\\TroopController::singleAction',  'requirements' =>   array (    'level' => '\\d+',    'name' => '^(?!ajouter|modifier|supprimer).+',  ),));
+            }
+
+        }
+
+        if (0 === strpos($pathinfo, '/defense/arme')) {
+            // her_general_weapon_homepage
+            if (rtrim($pathinfo, '/') === '/defense/arme') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'her_general_weapon_homepage');
+                }
+
+                return array (  '_controller' => 'Her\\ItemsBundle\\Controller\\GeneralWeaponController::indexAction',  '_route' => 'her_general_weapon_homepage',);
+            }
+
+            // her_general_weapon_add
+            if (rtrim($pathinfo, '/') === '/defense/arme/ajouter') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'her_general_weapon_add');
+                }
+
+                return array (  '_controller' => 'Her\\ItemsBundle\\Controller\\GeneralWeaponController::addAction',  '_route' => 'her_general_weapon_add',);
+            }
+
+            // her_general_weapon_edit
+            if (0 === strpos($pathinfo, '/defense/arme/modifier') && preg_match('#^/defense/arme/modifier/(?P<name>[^/]++)/?$#s', $pathinfo
